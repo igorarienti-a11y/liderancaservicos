@@ -103,9 +103,9 @@ const Testimonials = ({ testimonials = defaultTestimonials }: TestimonialsProps)
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
           {[
             { number: "30+", label: "Anos de Mercado" },
-            { number: "500+", label: "Clientes Atendidos" },
-            { number: "15.000+", label: "Colaboradores" },
-            { number: "98%", label: "Satisfação" },
+            { number: "1000+", label: "Empresas Atendidas" },
+            { number: "32 mil+", label: "Colaboradores" },
+            { number: "6", label: "Estados Atendidos" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <p className="text-4xl md:text-5xl font-bold text-secondary">

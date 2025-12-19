@@ -15,7 +15,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-primary/90 backdrop-blur-md border-b border-primary-foreground/10">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <div className="flex items-center">
           <img
@@ -28,7 +28,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
         <div className="flex items-center gap-4">
           <a
             href="tel:4837333100"
-            className="hidden md:flex items-center gap-2 text-primary font-medium hover:text-secondary transition-colors"
+            className="hidden md:flex items-center gap-2 text-primary-foreground font-medium hover:text-secondary transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

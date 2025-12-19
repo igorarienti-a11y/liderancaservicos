@@ -105,7 +105,7 @@ const Testimonials = ({ testimonials = defaultTestimonials }: TestimonialsProps)
             { number: "30+", label: "Anos de Mercado" },
             { number: "1000+", label: "Empresas Atendidas" },
             { number: "32 mil+", label: "Colaboradores" },
-            { number: "6", label: "Estados Atendidos" },
+            { number: "27", label: "Estados Atendidos" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <p className="text-4xl md:text-5xl font-bold text-secondary">

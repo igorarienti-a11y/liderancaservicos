@@ -5,6 +5,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
+}
+
 const leadSchema = z.object({
   nome: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
   empresa: z.string().trim().min(2, "Nome da empresa deve ter pelo menos 2 caracteres").max(100, "Nome da empresa muito longo"),
@@ -48,6 +54,15 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       
       // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1500));
+      
+      // Dispara evento para o Google Tag Manager
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'send_form',
+          form_name: serviceName,
+          form_type: serviceType,
+        });
+      }
       
       toast({
         title: "Solicitação enviada com sucesso!",

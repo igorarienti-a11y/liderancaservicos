@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 declare global {
@@ -52,8 +53,20 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     try {
       const validatedData = leadSchema.parse(formData);
       
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Save lead to database
+      const { error } = await supabase.from("leads").insert({
+        nome: validatedData.nome,
+        empresa: validatedData.empresa,
+        email: validatedData.email,
+        telefone: validatedData.telefone,
+        mensagem: validatedData.mensagem || null,
+        service_type: serviceType,
+        service_name: serviceName,
+      });
+
+      if (error) {
+        throw new Error("Erro ao salvar lead");
+      }
       
       // Dispara evento para o Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {

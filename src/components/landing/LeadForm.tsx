@@ -22,7 +22,7 @@ const leadSchema = z.object({
 
 interface LeadFormProps {
   serviceName: string;
-  serviceType: "facilities" | "limpeza" | "seguranca";
+  serviceType: "facilities" | "limpeza" | "seguranca" | "sindico";
 }
 
 const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
@@ -114,6 +114,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     facilities: "from-primary to-lideranca-navy-dark",
     limpeza: "from-primary to-lideranca-navy-dark",
     seguranca: "from-primary to-lideranca-navy-dark",
+    sindico: "from-primary to-lideranca-navy-dark",
   };
 
   return (

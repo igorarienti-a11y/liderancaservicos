@@ -85,7 +85,7 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 }
 
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
-  const range = 'A:H'; // Columns A to H
+  const range = 'A:M'; // Columns A to M (added UTM columns)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const response = await fetch(url, {
@@ -135,9 +135,12 @@ serve(async (req) => {
       );
     }
 
-    const { nome, empresa, email, telefone, mensagem, serviceName, serviceType } = await req.json();
+    const { 
+      nome, empresa, email, telefone, mensagem, serviceName, serviceType,
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content 
+    } = await req.json();
 
-    console.log('Received lead data:', { nome, empresa, email, serviceType });
+    console.log('Received lead data:', { nome, empresa, email, serviceType, utm_source, utm_medium, utm_campaign });
 
     // Format date in Brazilian format
     const now = new Date();
@@ -163,7 +166,12 @@ serve(async (req) => {
       telefone || '',
       mensagem || '',
       serviceName || '',
-      serviceType || ''
+      serviceType || '',
+      utm_source || '',
+      utm_medium || '',
+      utm_campaign || '',
+      utm_term || '',
+      utm_content || ''
     ];
 
     console.log('Appending to sheet...');

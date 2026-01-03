@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useUTM } from "@/hooks/use-utm";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
@@ -27,6 +28,7 @@ interface LeadFormProps {
 
 const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const { toast } = useToast();
+  const utmParams = useUTM();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
@@ -78,6 +80,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
           mensagem: validatedData.mensagem || '',
           serviceName,
           serviceType,
+          ...utmParams,
         }
       }).catch((err) => {
         console.error('Erro ao sincronizar com Google Sheets:', err);

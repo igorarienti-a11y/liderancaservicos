@@ -67,6 +67,21 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       if (error) {
         throw new Error("Erro ao salvar lead");
       }
+
+      // Sync to Google Sheets (non-blocking)
+      supabase.functions.invoke('sync-to-sheets', {
+        body: {
+          nome: validatedData.nome,
+          empresa: validatedData.empresa,
+          email: validatedData.email,
+          telefone: validatedData.telefone,
+          mensagem: validatedData.mensagem || '',
+          serviceName,
+          serviceType,
+        }
+      }).catch((err) => {
+        console.error('Erro ao sincronizar com Google Sheets:', err);
+      });
       
       // Dispara evento para o Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {

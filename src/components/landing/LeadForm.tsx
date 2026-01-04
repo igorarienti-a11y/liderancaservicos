@@ -47,8 +47,69 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     }
   };
 
+  // Rate limiting constants
+  const RATE_LIMIT_KEY = 'lead_submissions';
+  const RATE_LIMIT_WINDOW = 3600000; // 1 hour in ms
+  const MAX_SUBMISSIONS_PER_WINDOW = 3;
+
+  const checkRateLimit = (): { allowed: boolean; waitTime: number } => {
+    try {
+      const data = localStorage.getItem(RATE_LIMIT_KEY);
+      if (!data) return { allowed: true, waitTime: 0 };
+
+      const submissions: number[] = JSON.parse(data);
+      const now = Date.now();
+      
+      // Filter submissions within the window
+      const recentSubmissions = submissions.filter(
+        (timestamp) => now - timestamp < RATE_LIMIT_WINDOW
+      );
+
+      if (recentSubmissions.length >= MAX_SUBMISSIONS_PER_WINDOW) {
+        const oldestSubmission = Math.min(...recentSubmissions);
+        const waitTime = RATE_LIMIT_WINDOW - (now - oldestSubmission);
+        return { allowed: false, waitTime };
+      }
+
+      return { allowed: true, waitTime: 0 };
+    } catch {
+      return { allowed: true, waitTime: 0 };
+    }
+  };
+
+  const recordSubmission = () => {
+    try {
+      const data = localStorage.getItem(RATE_LIMIT_KEY);
+      const submissions: number[] = data ? JSON.parse(data) : [];
+      const now = Date.now();
+      
+      // Keep only recent submissions + new one
+      const recentSubmissions = submissions.filter(
+        (timestamp) => now - timestamp < RATE_LIMIT_WINDOW
+      );
+      recentSubmissions.push(now);
+      
+      localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recentSubmissions));
+    } catch {
+      // Ignore localStorage errors
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check rate limit before proceeding
+    const { allowed, waitTime } = checkRateLimit();
+    if (!allowed) {
+      const minutes = Math.ceil(waitTime / 60000);
+      toast({
+        title: "Limite de envios atingido",
+        description: `Por favor, aguarde ${minutes} minuto${minutes > 1 ? 's' : ''} antes de enviar outro formulário.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setErrors({});
 
@@ -69,6 +130,9 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       if (error) {
         throw new Error("Erro ao salvar lead");
       }
+
+      // Record successful submission for rate limiting
+      recordSubmission();
 
       // Sync to Google Sheets (non-blocking)
       supabase.functions.invoke('sync-to-sheets', {

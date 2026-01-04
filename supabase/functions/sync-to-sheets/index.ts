@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -155,11 +156,13 @@ serve(async (req) => {
   try {
     const serviceAccountKey = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_KEY');
     const spreadsheetId = Deno.env.get('GOOGLE_SHEETS_SPREADSHEET_ID');
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!serviceAccountKey) {
       console.error('Missing GOOGLE_SERVICE_ACCOUNT_KEY');
       return new Response(
-        JSON.stringify({ error: 'Google Service Account not configured' }),
+        JSON.stringify({ error: 'Configuration error' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -167,7 +170,15 @@ serve(async (req) => {
     if (!spreadsheetId) {
       console.error('Missing GOOGLE_SHEETS_SPREADSHEET_ID');
       return new Response(
-        JSON.stringify({ error: 'Spreadsheet ID not configured' }),
+        JSON.stringify({ error: 'Configuration error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing Supabase configuration');
+      return new Response(
+        JSON.stringify({ error: 'Configuration error' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -176,6 +187,47 @@ serve(async (req) => {
       nome, empresa, email, telefone, mensagem, serviceName, serviceType,
       utm_source, utm_medium, utm_campaign, utm_term, utm_content 
     } = await req.json();
+
+    // Validate required fields
+    if (!email || typeof email !== 'string') {
+      console.error('Missing or invalid email');
+      return new Response(
+        JSON.stringify({ error: 'Invalid request' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Initialize Supabase client
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Server-side validation: Verify that the lead exists in the database (created within last 5 minutes)
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    const { data: lead, error: leadError } = await supabase
+      .from('leads')
+      .select('id, email, nome, empresa')
+      .eq('email', email.trim().toLowerCase())
+      .gte('created_at', fiveMinutesAgo)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (leadError) {
+      console.error('Database query error:', leadError.message);
+      return new Response(
+        JSON.stringify({ error: 'Validation failed' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!lead) {
+      console.error('Lead not found in database for email:', email);
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized: Lead must be submitted through the form first' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('Lead verified in database:', lead.id);
 
     console.log('Received lead data:', { nome, empresa, email, serviceType, utm_source, utm_medium, utm_campaign });
 
@@ -224,10 +276,11 @@ serve(async (req) => {
     );
 
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Failed to sync to Google Sheets';
+    // Log detailed error server-side, return generic message to client
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error syncing to sheets:', errorMessage);
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: 'Failed to process request' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

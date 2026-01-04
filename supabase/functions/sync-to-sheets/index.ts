@@ -84,6 +84,43 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
   return tokenData.access_token;
 }
 
+async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
+  const headers = [
+    'Data', 'Nome', 'Empresa', 'Email', 'Telefone', 'Mensagem', 
+    'Serviço', 'Tipo', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Term', 'UTM Content'
+  ];
+
+  // Check if first row exists
+  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:M1`;
+  const checkResponse = await fetch(checkUrl, {
+    headers: { 'Authorization': `Bearer ${accessToken}` },
+  });
+
+  const checkResult = await checkResponse.json();
+  
+  // If no values or first cell is empty, add headers
+  if (!checkResult.values || checkResult.values.length === 0 || !checkResult.values[0][0]) {
+    console.log('Adding headers to sheet...');
+    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:M1?valueInputOption=USER_ENTERED`;
+    
+    const updateResponse = await fetch(updateUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ values: [headers] }),
+    });
+
+    if (!updateResponse.ok) {
+      const error = await updateResponse.json();
+      console.error('Failed to add headers:', error);
+    } else {
+      console.log('Headers added successfully');
+    }
+  }
+}
+
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
   const range = 'A:M'; // Columns A to M (added UTM columns)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
@@ -174,6 +211,10 @@ serve(async (req) => {
       utm_content || ''
     ];
 
+    // Check and add headers if needed
+    await checkAndAddHeaders(accessToken, spreadsheetId);
+
+    // Append row to sheet
     console.log('Appending to sheet...');
     await appendToSheet(accessToken, spreadsheetId, values);
 

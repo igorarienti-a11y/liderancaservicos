@@ -46,7 +46,7 @@ const CozinheiraPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Cozinheira"
       heroSubtitle="Cozinheiras profissionais para refeitórios e cozinhas industriais. Refeições de qualidade para sua equipe."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_3@4x.jpg"
+      heroImage="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções para Cozinha"
       services={services}

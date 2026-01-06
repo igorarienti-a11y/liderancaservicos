@@ -46,7 +46,7 @@ const DigitacaoPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Digitação"
       heroSubtitle="Profissionais de digitação para entrada de dados, transcrição e cadastros. Agilidade e precisão para sua operação."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_4@4x.jpg"
+      heroImage="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções em Digitação"
       services={services}

@@ -196,8 +196,10 @@ const Index = () => {
       </section>
 
       {/* Services Carousel */}
-      <section id="servicos" className="bg-primary py-16 md:py-20">
-        <div className="container mx-auto px-4">
+      <section id="servicos" className="relative bg-primary py-16 md:py-20 overflow-hidden">
+        {/* Solid background overlay to cover any decorative lines */}
+        <div className="absolute inset-0 bg-primary z-0" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
             <p className="text-secondary font-semibold uppercase tracking-wide mb-2">Nossos Serviços</p>
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground">

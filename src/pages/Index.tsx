@@ -167,8 +167,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="bg-primary py-8">
+      {/* Stats Section - Hidden on mobile */}
+      <section className="hidden md:block bg-primary py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
             <div className="text-center">

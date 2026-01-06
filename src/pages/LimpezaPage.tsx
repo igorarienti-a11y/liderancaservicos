@@ -1,12 +1,18 @@
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
+import AboutSection from "@/components/landing/AboutSection";
 import BenefitsSection from "@/components/landing/BenefitsSection";
+import ProcessSection from "@/components/landing/ProcessSection";
 import ServicesGrid from "@/components/landing/ServicesGrid";
+import FAQSection from "@/components/landing/FAQSection";
+import CasesSection, { TrendingUp, Clock, Users, Building } from "@/components/landing/CasesSection";
 import Testimonials from "@/components/landing/Testimonials";
+import CertificationsSection from "@/components/landing/CertificationsSection";
 import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import heroImage from "@/assets/hero-limpeza.jpg";
+import { ClipboardCheck, FileText, Rocket, RefreshCcw } from "lucide-react";
 
 const LimpezaPage = () => {
   const benefits = [
@@ -120,6 +126,101 @@ const LimpezaPage = () => {
     },
   ];
 
+  const processSteps = [
+    {
+      icon: <ClipboardCheck className="h-8 w-8" />,
+      number: "01",
+      title: "Visita Técnica",
+      description: "Nossa equipe realiza uma visita ao local para avaliar as necessidades específicas de limpeza, metragem, frequência e tipos de superfícies a serem tratadas.",
+    },
+    {
+      icon: <FileText className="h-8 w-8" />,
+      number: "02",
+      title: "Plano de Limpeza",
+      description: "Desenvolvemos um plano personalizado com cronograma, checklist de atividades, produtos adequados e quantidade de profissionais necessários.",
+    },
+    {
+      icon: <Rocket className="h-8 w-8" />,
+      number: "03",
+      title: "Execução Impecável",
+      description: "Equipes treinadas executam o serviço seguindo protocolos rigorosos de qualidade, com supervisão constante e uso de EPIs adequados.",
+    },
+    {
+      icon: <RefreshCcw className="h-8 w-8" />,
+      number: "04",
+      title: "Controle de Qualidade",
+      description: "Realizamos inspeções periódicas, coletamos feedback e ajustamos processos para manter a excelência constante dos serviços.",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "Qual a diferença entre limpeza comum e limpeza profissional?",
+      answer: "A limpeza profissional utiliza técnicas especializadas, produtos adequados para cada tipo de superfície, equipamentos profissionais e segue protocolos rigorosos de qualidade. Nossos colaboradores recebem treinamento contínuo e são supervisionados para garantir resultados superiores e consistentes.",
+    },
+    {
+      question: "Vocês fornecem os produtos e equipamentos de limpeza?",
+      answer: "Sim, a Liderança fornece todos os produtos e equipamentos necessários. Utilizamos produtos de alta qualidade, adequados para cada tipo de superfície e ambiente. Também oferecemos opções de produtos eco-friendly para empresas que priorizam a sustentabilidade.",
+    },
+    {
+      question: "É possível personalizar a frequência e horários de limpeza?",
+      answer: "Absolutamente. Oferecemos total flexibilidade para adaptar nossos serviços à rotina da sua empresa. Podemos realizar a limpeza antes do expediente, durante o horário comercial, à noite ou nos finais de semana, conforme sua necessidade.",
+    },
+    {
+      question: "Como funciona a limpeza em ambientes sensíveis como hospitais?",
+      answer: "Para ambientes de saúde, utilizamos protocolos específicos de higienização hospitalar, com produtos desinfetantes de grau hospitalar, técnicas de limpeza terminal e profissionais treinados em biossegurança. Seguimos todas as normas da ANVISA e CCIH.",
+    },
+    {
+      question: "O que fazer em caso de ausência de um profissional de limpeza?",
+      answer: "A Liderança possui um sistema de gestão que garante a reposição imediata de profissionais em caso de faltas ou férias. Mantemos uma equipe de reserva treinada e pronta para assumir qualquer posto sem prejuízo à qualidade do serviço.",
+    },
+    {
+      question: "Vocês realizam serviços de limpeza pós-obra?",
+      answer: "Sim, oferecemos serviços de limpeza pós-obra que incluem remoção de resíduos de construção, limpeza de vidros, polimento de pisos, higienização completa de ambientes e preparação do espaço para uso. Entre em contato para um orçamento personalizado.",
+    },
+  ];
+
+  const cases = [
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      metric: "98%",
+      description: "Índice de satisfação dos clientes em pesquisas de qualidade",
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
+      metric: "24/7",
+      description: "Disponibilidade para atender demandas urgentes e emergências",
+    },
+    {
+      icon: <Users className="h-6 w-6" />,
+      metric: "15 mil+",
+      description: "Profissionais de limpeza atuando em todo o Brasil",
+    },
+    {
+      icon: <Building className="h-6 w-6" />,
+      metric: "500+",
+      description: "Contratos ativos de limpeza em diversos segmentos",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "Colaboradoras da limpeza são organizadas, deixam os ambientes limpos, são pontuais e muito caprichosas.",
+      author: "Leandro Souza",
+      company: "Gol Linhas Aéreas - Florianópolis/SC",
+    },
+    {
+      quote: "Presta um atendimento excelente, com profissionais competentes, atenciosos e prestativos. Sempre dispostos a nos ajudar.",
+      author: "Ingrid Costa Santos",
+      company: "Pernambucanas Desenvolvimento de Vendas",
+    },
+    {
+      quote: "A qualidade da limpeza melhorou significativamente após a contratação da Liderança. Os ambientes estão sempre impecáveis.",
+      author: "Maria Helena",
+      company: "Escritório de Advocacia - São Paulo/SP",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       <Header ctaText="Solicitar Orçamento" />
@@ -132,10 +233,18 @@ const LimpezaPage = () => {
         ctaText="Quero um Orçamento"
       />
 
+      <AboutSection />
+
       <BenefitsSection
         title="Limpeza que faz a diferença"
         subtitle="Descubra por que as maiores empresas do Brasil confiam na Liderança para seus serviços de limpeza"
         benefits={benefits}
+      />
+
+      <ProcessSection 
+        title="Como realizamos a limpeza"
+        subtitle="Nossa metodologia garante ambientes sempre impecáveis e saudáveis"
+        steps={processSteps}
       />
 
       <ServicesGrid
@@ -144,7 +253,21 @@ const LimpezaPage = () => {
         services={services}
       />
 
-      <Testimonials />
+      <FAQSection 
+        title="Dúvidas sobre Limpeza"
+        subtitle="Tire suas dúvidas sobre nossos serviços de limpeza profissional"
+        faqs={faqs}
+      />
+
+      <CasesSection 
+        title="Resultados em Limpeza"
+        subtitle="Números que comprovam nossa excelência em serviços de limpeza"
+        cases={cases}
+      />
+
+      <Testimonials testimonials={testimonials} />
+
+      <CertificationsSection />
 
       <CTASection
         title="Ambiente limpo, negócio saudável"

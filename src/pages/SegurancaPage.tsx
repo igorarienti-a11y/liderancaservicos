@@ -1,12 +1,18 @@
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
+import AboutSection from "@/components/landing/AboutSection";
 import BenefitsSection from "@/components/landing/BenefitsSection";
+import ProcessSection from "@/components/landing/ProcessSection";
 import ServicesGrid from "@/components/landing/ServicesGrid";
+import FAQSection from "@/components/landing/FAQSection";
+import CasesSection, { TrendingUp, Clock, Users, Building } from "@/components/landing/CasesSection";
 import Testimonials from "@/components/landing/Testimonials";
+import CertificationsSection from "@/components/landing/CertificationsSection";
 import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import heroImage from "@/assets/hero-seguranca.jpg";
+import { ClipboardCheck, FileText, Rocket, RefreshCcw } from "lucide-react";
 
 const SegurancaPage = () => {
   const benefits = [
@@ -122,6 +128,101 @@ const SegurancaPage = () => {
     },
   ];
 
+  const processSteps = [
+    {
+      icon: <ClipboardCheck className="h-8 w-8" />,
+      number: "01",
+      title: "Análise de Riscos",
+      description: "Realizamos um estudo completo das vulnerabilidades do seu patrimônio, identificando pontos críticos e definindo as melhores estratégias de proteção.",
+    },
+    {
+      icon: <FileText className="h-8 w-8" />,
+      number: "02",
+      title: "Plano de Segurança",
+      description: "Elaboramos um plano personalizado com definição de postos, escalas, procedimentos operacionais e protocolos de emergência específicos para sua operação.",
+    },
+    {
+      icon: <Rocket className="h-8 w-8" />,
+      number: "03",
+      title: "Implantação",
+      description: "Selecionamos, treinamos e alocamos profissionais qualificados, implementamos tecnologias de segurança e estabelecemos rotinas de vigilância.",
+    },
+    {
+      icon: <RefreshCcw className="h-8 w-8" />,
+      number: "04",
+      title: "Monitoramento Contínuo",
+      description: "Acompanhamos indicadores de segurança, realizamos auditorias periódicas e ajustamos estratégias para manter a proteção sempre atualizada.",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "Qual a diferença entre vigilante armado e desarmado?",
+      answer: "O vigilante armado possui autorização legal para portar arma de fogo e é indicado para locais com maior risco, como bancos, transportadoras de valores e grandes indústrias. O vigilante desarmado atua com técnicas de observação, controle de acesso e abordagem preventiva, sendo ideal para escritórios, lojas e condomínios. A Liderança avalia cada caso para indicar a melhor solução.",
+    },
+    {
+      question: "Vocês oferecem monitoramento eletrônico junto com a vigilância?",
+      answer: "Sim, oferecemos soluções integradas que combinam vigilância humana com tecnologia: sistemas de CFTV, alarmes, controle de acesso biométrico, sensores de presença e central de monitoramento 24h. Essa combinação potencializa a segurança e reduz custos operacionais.",
+    },
+    {
+      question: "Como é feita a seleção e treinamento dos vigilantes?",
+      answer: "Nossos vigilantes passam por rigoroso processo seletivo com verificação de antecedentes, avaliação psicológica e técnica. Todos possuem curso de formação de vigilante credenciado pela Polícia Federal e participam de reciclagens periódicas, além de treinamentos específicos para cada tipo de posto.",
+    },
+    {
+      question: "O que fazer em caso de ocorrência durante o período de vigilância?",
+      answer: "Nossos vigilantes são treinados para seguir protocolos específicos para cada tipo de ocorrência. Além disso, mantemos uma central de operações 24h que pode ser acionada imediatamente. Todas as ocorrências são documentadas em relatórios detalhados para análise e tomada de decisões.",
+    },
+    {
+      question: "A Liderança possui autorização da Polícia Federal?",
+      answer: "Sim, a Liderança (através da Lince Patrimonial) possui todas as autorizações necessárias da Polícia Federal para prestação de serviços de vigilância patrimonial, incluindo vigilância armada. Cumprimos rigorosamente todas as exigências legais do setor.",
+    },
+    {
+      question: "Vocês atendem eventos e demandas temporárias?",
+      answer: "Sim, oferecemos serviços de segurança para eventos, obras, demandas sazonais e contratações temporárias. Nossa estrutura nacional permite mobilizar equipes rapidamente para atender necessidades pontuais em qualquer região do Brasil.",
+    },
+  ];
+
+  const cases = [
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      metric: "Zero",
+      description: "Tolerância a falhas de segurança com protocolos rigorosos",
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
+      metric: "< 5 min",
+      description: "Tempo médio de resposta para ocorrências críticas",
+    },
+    {
+      icon: <Users className="h-6 w-6" />,
+      metric: "8 mil+",
+      description: "Profissionais de segurança certificados em todo o Brasil",
+    },
+    {
+      icon: <Building className="h-6 w-6" />,
+      metric: "300+",
+      description: "Contratos ativos de vigilância patrimonial",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "A segurança do nosso centro de distribuição melhorou significativamente. Os vigilantes são profissionais e bem treinados.",
+      author: "Carlos Eduardo",
+      company: "Centro Logístico ABC - Curitiba/PR",
+    },
+    {
+      quote: "A Liderança trouxe tranquilidade para nosso condomínio. O controle de acesso é rigoroso e os moradores se sentem seguros.",
+      author: "Síndico Roberto",
+      company: "Condomínio Jardins - Florianópolis/SC",
+    },
+    {
+      quote: "Parceria sólida há mais de 10 anos. A qualidade do serviço e a gestão profissional fazem toda a diferença.",
+      author: "Ana Paula",
+      company: "Rede de Supermercados - Porto Alegre/RS",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       <Header ctaText="Solicitar Orçamento" />
@@ -134,10 +235,18 @@ const SegurancaPage = () => {
         ctaText="Quero um Orçamento"
       />
 
+      <AboutSection />
+
       <BenefitsSection
         title="Segurança que você pode confiar"
         subtitle="Descubra por que somos referência em segurança patrimonial há mais de 30 anos"
         benefits={benefits}
+      />
+
+      <ProcessSection 
+        title="Como protegemos seu patrimônio"
+        subtitle="Nossa metodologia de segurança desenvolvida com base em 30 anos de experiência"
+        steps={processSteps}
       />
 
       <ServicesGrid
@@ -146,7 +255,21 @@ const SegurancaPage = () => {
         services={services}
       />
 
-      <Testimonials />
+      <FAQSection 
+        title="Dúvidas sobre Segurança"
+        subtitle="Entenda como funcionam nossos serviços de segurança patrimonial"
+        faqs={faqs}
+      />
+
+      <CasesSection 
+        title="Resultados em Segurança"
+        subtitle="Indicadores que demonstram nosso compromisso com a proteção"
+        cases={cases}
+      />
+
+      <Testimonials testimonials={testimonials} />
+
+      <CertificationsSection />
 
       <CTASection
         title="Seu patrimônio merece proteção profissional"

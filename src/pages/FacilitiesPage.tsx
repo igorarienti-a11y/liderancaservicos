@@ -1,8 +1,13 @@
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
+import AboutSection from "@/components/landing/AboutSection";
 import BenefitsSection from "@/components/landing/BenefitsSection";
+import ProcessSection from "@/components/landing/ProcessSection";
 import ServicesGrid from "@/components/landing/ServicesGrid";
+import FAQSection from "@/components/landing/FAQSection";
+import CasesSection, { TrendingUp, Clock, Users, Building } from "@/components/landing/CasesSection";
 import Testimonials from "@/components/landing/Testimonials";
+import CertificationsSection from "@/components/landing/CertificationsSection";
 import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
@@ -119,6 +124,74 @@ const FacilitiesPage = () => {
     },
   ];
 
+  const faqs = [
+    {
+      question: "O que é gestão de facilities e como funciona?",
+      answer: "Gestão de facilities é a administração integrada de todos os serviços que mantêm um edifício funcionando: manutenção predial, limpeza, recepção, segurança, jardinagem, entre outros. A Liderança atua como parceira única, gerenciando todas essas operações de forma coordenada, permitindo que sua empresa foque no core business enquanto cuidamos da infraestrutura.",
+    },
+    {
+      question: "Quais são as vantagens de terceirizar facilities com a Liderança?",
+      answer: "As principais vantagens incluem: redução de custos operacionais através de economia de escala; eliminação de passivos trabalhistas; acesso a profissionais especializados e treinados; flexibilidade para ajustar a equipe conforme demanda; gestão profissional com indicadores e relatórios; e suporte 24 horas para emergências.",
+    },
+    {
+      question: "A Liderança atende empresas de todos os portes?",
+      answer: "Sim, atendemos desde pequenos escritórios até grandes indústrias e complexos comerciais. Com presença em todos os 27 estados brasileiros e mais de 32 mil colaboradores, temos estrutura para atender operações de qualquer porte, adaptando nossas soluções às necessidades específicas de cada cliente.",
+    },
+    {
+      question: "Como é feito o processo de transição para a Liderança?",
+      answer: "O processo começa com um diagnóstico detalhado do seu empreendimento. Em seguida, elaboramos uma proposta personalizada com escopo, cronograma e investimento. A implementação é feita de forma planejada, com treinamento das equipes e acompanhamento dedicado para garantir uma transição suave, sem interrupção das operações.",
+    },
+    {
+      question: "Vocês possuem certificações de qualidade?",
+      answer: "Sim, a Liderança possui certificação ISO 9001, que garante a qualidade e confiabilidade dos nossos serviços. Além disso, somos reconhecidos pelo Great Place to Work como uma das melhores empresas para se trabalhar no setor, e figuramos entre as 500 maiores empresas do Sul do Brasil.",
+    },
+    {
+      question: "Como funciona o suporte e acompanhamento após a contratação?",
+      answer: "Oferecemos acompanhamento contínuo com um gestor de conta dedicado, reuniões periódicas de alinhamento, relatórios de indicadores, canal de comunicação 24 horas para emergências e um processo de melhoria contínua que ajusta os serviços conforme o feedback e as necessidades que surgem ao longo do contrato.",
+    },
+  ];
+
+  const cases = [
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      metric: "Até 30%",
+      description: "Redução nos custos operacionais com gestão integrada",
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
+      metric: "< 2 horas",
+      description: "Tempo médio de resposta para chamados urgentes",
+    },
+    {
+      icon: <Users className="h-6 w-6" />,
+      metric: "32 mil",
+      description: "Colaboradores treinados em todo o Brasil",
+    },
+    {
+      icon: <Building className="h-6 w-6" />,
+      metric: "1000+",
+      description: "Empresas atendidas nos setores público e privado",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "Simplicidade, proximidade e agilidade têm sido os pilares do relacionamento. Grata surpresa na prestação de serviços no Oeste de Santa Catarina.",
+      author: "Bruno Laures",
+      company: "Kellogg's - Santa Catarina",
+    },
+    {
+      quote: "Acompanho o crescimento da LIMGER (Grupo Liderança) durante muitos anos. Sempre nos atenderam com qualidade, profissionalismo e agilidade.",
+      author: "Claudio Lopes de Oliveira",
+      company: "BRF - Serafina Corrêa/RS",
+    },
+    {
+      quote: "A Liderança, juntamente com seus gestores trabalham diariamente em cima da eficácia e eficiência dos seus serviços prestados. Sou grato pela parceria de sempre.",
+      author: "Ebazar Simões Filho",
+      company: "Mercado Livre - Salvador",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       <Header ctaText="Solicitar Orçamento" />
@@ -131,10 +204,17 @@ const FacilitiesPage = () => {
         ctaText="Quero um Orçamento"
       />
 
+      <AboutSection />
+
       <BenefitsSection
         title="Por que terceirizar Facilities?"
         subtitle="Descubra as vantagens de ter a Liderança como parceira na gestão do seu empreendimento"
         benefits={benefits}
+      />
+
+      <ProcessSection 
+        title="Como implementamos Facilities"
+        subtitle="Nossa metodologia testada em mais de 1000 empresas garante uma transição segura"
       />
 
       <ServicesGrid
@@ -143,7 +223,21 @@ const FacilitiesPage = () => {
         services={services}
       />
 
-      <Testimonials />
+      <FAQSection 
+        title="Dúvidas sobre Facilities"
+        subtitle="Entenda como funciona a terceirização de facilities com a Liderança"
+        faqs={faqs}
+      />
+
+      <CasesSection 
+        title="Resultados em Facilities"
+        subtitle="Veja o que entregamos para nossos clientes em gestão de facilities"
+        cases={cases}
+      />
+
+      <Testimonials testimonials={testimonials} />
+
+      <CertificationsSection />
 
       <CTASection
         title="Pronto para otimizar sua gestão?"

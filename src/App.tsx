@@ -8,6 +8,20 @@ import FacilitiesPage from "./pages/FacilitiesPage";
 import LimpezaPage from "./pages/LimpezaPage";
 import SegurancaPage from "./pages/SegurancaPage";
 import SindicoPage from "./pages/SindicoPage";
+import TelefoniaPage from "./pages/TelefoniaPage";
+import ZeladoriaPage from "./pages/ZeladoriaPage";
+import LimpezaConservacaoPage from "./pages/LimpezaConservacaoPage";
+import SegurancaPatrimonialPage from "./pages/SegurancaPatrimonialPage";
+import AscensoristaPage from "./pages/AscensoristaPage";
+import GarcomPage from "./pages/GarcomPage";
+import JardinagemPage from "./pages/JardinagemPage";
+import MaoDeObraPage from "./pages/MaoDeObraPage";
+import CopaCafePage from "./pages/CopaCafePage";
+import CozinheiraPage from "./pages/CozinheiraPage";
+import DigitacaoPage from "./pages/DigitacaoPage";
+import MotoristaPage from "./pages/MotoristaPage";
+import PortariaPage from "./pages/PortariaPage";
+import RecepcaoPage from "./pages/RecepcaoPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +38,20 @@ const App = () => (
           <Route path="/limpeza" element={<LimpezaPage />} />
           <Route path="/seguranca" element={<SegurancaPage />} />
           <Route path="/sindico" element={<SindicoPage />} />
+          <Route path="/telefonia" element={<TelefoniaPage />} />
+          <Route path="/zeladoria" element={<ZeladoriaPage />} />
+          <Route path="/limpeza-conservacao" element={<LimpezaConservacaoPage />} />
+          <Route path="/seguranca-patrimonial" element={<SegurancaPatrimonialPage />} />
+          <Route path="/ascensorista" element={<AscensoristaPage />} />
+          <Route path="/garcom" element={<GarcomPage />} />
+          <Route path="/jardinagem" element={<JardinagemPage />} />
+          <Route path="/mao-de-obra" element={<MaoDeObraPage />} />
+          <Route path="/copa-cafe" element={<CopaCafePage />} />
+          <Route path="/cozinheira" element={<CozinheiraPage />} />
+          <Route path="/digitacao" element={<DigitacaoPage />} />
+          <Route path="/motorista" element={<MotoristaPage />} />
+          <Route path="/portaria" element={<PortariaPage />} />
+          <Route path="/recepcao" element={<RecepcaoPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

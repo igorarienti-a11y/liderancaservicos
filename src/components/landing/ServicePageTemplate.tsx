@@ -7,6 +7,8 @@ import CompactBenefits from "@/components/landing/CompactBenefits";
 import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 interface ServiceItem {
   icon: ReactNode;
@@ -72,6 +74,13 @@ const ServicePageTemplate = ({
   serviceName,
   serviceType,
 }: ServicePageTemplateProps) => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById("lead-form");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header ctaText={ctaText} />
@@ -83,6 +92,20 @@ const ServicePageTemplate = ({
         heroImage={heroImage}
         ctaText={ctaText}
       />
+
+      {/* Mobile CTA Button - Only visible on mobile */}
+      <section className="md:hidden bg-primary py-4">
+        <div className="container mx-auto px-4">
+          <Button 
+            onClick={scrollToForm}
+            size="lg" 
+            className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-base py-5 shadow-button"
+          >
+            Solicitar Orçamento
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+      </section>
 
       <StatsSection stats={stats} />
 

@@ -46,7 +46,7 @@ const MotoristaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Motorista"
       heroSubtitle="Motoristas profissionais para transporte executivo e de cargas. Segurança, pontualidade e eficiência no trânsito."
-      heroImage="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_9@4x.jpg"
       stats={stats}
       servicesTitle="Soluções em Transporte"
       services={services}

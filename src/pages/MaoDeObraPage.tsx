@@ -46,7 +46,7 @@ const MaoDeObraPage = () => {
       heroTitle="Mão de Obra"
       heroHighlight="em Geral"
       heroSubtitle="Profissionais qualificados para diversas funções. Auxiliares, operadores e equipes de apoio para sua operação."
-      heroImage="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_8@4x.jpg"
       stats={stats}
       servicesTitle="Soluções em Mão de Obra"
       services={services}

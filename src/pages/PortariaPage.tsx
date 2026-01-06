@@ -46,7 +46,7 @@ const PortariaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Portaria"
       heroSubtitle="Porteiros profissionais para controle de acesso. Segurança, organização e atendimento de qualidade na entrada do seu empreendimento."
-      heroImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_10@4x.jpg"
       stats={stats}
       servicesTitle="Soluções em Portaria"
       services={services}

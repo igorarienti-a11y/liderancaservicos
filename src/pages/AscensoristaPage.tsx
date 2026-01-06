@@ -46,7 +46,7 @@ const AscensoristaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Ascensorista"
       heroSubtitle="Operadores de elevador profissionais para seu edifício. Atendimento cordial, segurança e eficiência no transporte vertical."
-      heroImage="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_1@4x.jpg"
       stats={stats}
       servicesTitle="Soluções para Elevadores"
       services={services}

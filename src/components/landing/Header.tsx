@@ -58,9 +58,10 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
           
           <button
             onClick={scrollToForm}
-            className="bg-secondary text-primary font-bold px-6 py-3 rounded hover:bg-secondary/90 hover:shadow-lg transition-all duration-300"
+            className="bg-secondary text-primary font-bold px-4 py-2 md:px-6 md:py-3 text-sm md:text-base rounded hover:bg-secondary/90 hover:shadow-lg transition-all duration-300"
           >
-            {ctaText}
+            <span className="hidden sm:inline">{ctaText}</span>
+            <span className="sm:hidden">Orçamento</span>
           </button>
         </div>
       </header>

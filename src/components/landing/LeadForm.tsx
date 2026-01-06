@@ -131,22 +131,22 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const gradientClass = "from-primary to-lideranca-navy-dark";
 
   return (
-    <section id="lead-form" className="py-20 bg-muted">
+    <section id="lead-form" className="py-12 md:py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className={`bg-gradient-to-br ${gradientClass} rounded-3xl p-8 md:p-12 shadow-2xl`}>
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+          <div className={`bg-gradient-to-br ${gradientClass} rounded-2xl md:rounded-3xl p-5 md:p-8 lg:p-12 shadow-2xl`}>
+            <div className="text-center mb-6 md:mb-10">
+              <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-primary-foreground mb-3 md:mb-4">
                 Solicite um Orçamento Gratuito
               </h2>
-              <p className="text-primary-foreground/90 text-lg max-w-2xl mx-auto">
-                Preencha o formulário abaixo e nossa equipe especializada em{" "}
-                <span className="font-semibold text-secondary">{serviceName}</span> entrará em contato em até 24 horas.
+              <p className="text-primary-foreground/90 text-sm md:text-lg max-w-2xl mx-auto">
+                Preencha o formulário e nossa equipe de{" "}
+                <span className="font-semibold text-secondary">{serviceName}</span> entrará em contato.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <label htmlFor="nome" className="text-primary-foreground font-medium">
                     Nome Completo *

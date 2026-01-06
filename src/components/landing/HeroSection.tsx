@@ -24,7 +24,7 @@ const HeroSection = ({
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -35,41 +35,32 @@ const HeroSection = ({
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/70" />
       </div>
 
-      {/* Decorative "L" shape like official site */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 z-[1]">
-        <div className="w-4 h-64 bg-secondary" />
-        <div className="w-32 h-4 bg-secondary -mt-4" />
-      </div>
-
-      {/* Yellow accent line */}
-      <div className="absolute right-20 top-1/3 w-1 h-40 bg-secondary/30 hidden lg:block" />
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 py-12 md:py-0">
         <div className="max-w-3xl">
-          <p className="text-secondary font-medium text-lg mb-4 animate-slide-up">
+          <p className="text-secondary font-medium text-base md:text-lg mb-3 md:mb-4">
             O full service que dá certo
           </p>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 animate-slide-up leading-tight" style={{ animationDelay: "0.1s" }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 leading-tight">
             {title}{" "}
             <span className="text-secondary italic font-extrabold">{highlight}</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-primary-foreground/90 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "0.2s" }}>
+          <p className="text-base md:text-xl text-primary-foreground/90 mb-8 md:mb-10 max-w-2xl leading-relaxed">
             {subtitle}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
             <Button
               onClick={scrollToForm}
-              className="bg-secondary hover:bg-secondary/90 text-primary font-bold px-8 py-6 text-lg rounded shadow-lg hover:shadow-xl transition-all"
+              className="bg-secondary hover:bg-secondary/90 text-primary font-bold px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
             >
               {ctaText}
               <ChevronRight className="h-5 w-5 ml-2" />
             </Button>
             <Button 
               variant="outline" 
-              className="border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg rounded"
+              className="border-2 border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-primary px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded w-full sm:w-auto"
               asChild
             >
               <a href="tel:4837333100">

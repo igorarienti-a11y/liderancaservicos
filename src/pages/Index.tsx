@@ -142,10 +142,10 @@ const Index = () => {
         <img 
           src={heroBanner}
           alt="O full service que dá certo - Grupo Liderança"
-          className="w-full h-auto object-cover min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
+          className="w-full h-auto object-cover object-left md:object-center min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
         />
-        {/* Overlay with stats */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent py-8">
+        {/* Overlay with buttons - hidden on mobile */}
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent py-8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8">
               <div className="flex flex-col sm:flex-row gap-4 md:gap-8">

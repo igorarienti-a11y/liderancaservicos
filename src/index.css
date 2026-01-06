@@ -7,52 +7,56 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 60% 15%;
+    --foreground: 220 80% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 60% 15%;
+    --card-foreground: 220 80% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 60% 15%;
+    --popover-foreground: 220 80% 12%;
 
-    --primary: 224 60% 23%;
+    --primary: 220 85% 18%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 43 95% 55%;
-    --secondary-foreground: 224 60% 15%;
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 220 85% 12%;
 
     --muted: 220 20% 96%;
-    --muted-foreground: 220 15% 45%;
+    --muted-foreground: 220 15% 40%;
 
-    --accent: 43 95% 55%;
-    --accent-foreground: 224 60% 15%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 220 85% 12%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 220 20% 90%;
     --input: 220 20% 90%;
-    --ring: 224 60% 23%;
+    --ring: 220 85% 18%;
 
     --radius: 0.5rem;
 
-    /* Custom Colors */
-    --lideranca-navy: 224 60% 23%;
-    --lideranca-navy-dark: 224 65% 15%;
-    --lideranca-yellow: 43 95% 55%;
-    --lideranca-yellow-light: 43 95% 65%;
+    /* Liderança Brand Colors - Based on official website */
+    --lideranca-navy: 220 85% 18%;
+    --lideranca-navy-dark: 220 90% 12%;
+    --lideranca-navy-light: 220 75% 25%;
+    --lideranca-yellow: 45 100% 50%;
+    --lideranca-yellow-light: 45 100% 60%;
+    --lideranca-yellow-dark: 42 100% 42%;
     --lideranca-gray: 220 15% 96%;
     --lideranca-gray-dark: 220 10% 85%;
+    --lideranca-blue-glow: 210 100% 50%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(224 60% 23%) 0%, hsl(224 65% 15%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(43 95% 55%) 0%, hsl(43 100% 45%) 100%);
-    --gradient-overlay: linear-gradient(180deg, hsla(224, 60%, 15%, 0.9) 0%, hsla(224, 60%, 15%, 0.7) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 90% 12%) 0%, hsl(220 85% 18%) 50%, hsl(210 80% 25%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(45 100% 50%) 0%, hsl(42 100% 42%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsla(220, 90%, 12%, 0.95) 0%, hsla(220, 85%, 18%, 0.85) 100%);
 
     /* Shadows */
-    --shadow-card: 0 4px 20px -2px hsla(224, 60%, 15%, 0.1);
-    --shadow-button: 0 4px 14px -2px hsla(43, 95%, 55%, 0.5);
-    --shadow-hover: 0 8px 30px -4px hsla(224, 60%, 15%, 0.2);
+    --shadow-card: 0 4px 20px -2px hsla(220, 85%, 12%, 0.1);
+    --shadow-button: 0 4px 14px -2px hsla(45, 100%, 50%, 0.5);
+    --shadow-hover: 0 8px 30px -4px hsla(220, 85%, 12%, 0.2);
+    --shadow-glow: 0 0 30px hsla(45, 100%, 50%, 0.3);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

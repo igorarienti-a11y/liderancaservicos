@@ -23,7 +23,7 @@ const leadSchema = z.object({
 
 interface LeadFormProps {
   serviceName: string;
-  serviceType: "facilities" | "limpeza" | "seguranca" | "sindico";
+  serviceType: string;
 }
 
 const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
@@ -128,18 +128,13 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     }
   };
 
-  const gradientColors = {
-    facilities: "from-primary to-lideranca-navy-dark",
-    limpeza: "from-primary to-lideranca-navy-dark",
-    seguranca: "from-primary to-lideranca-navy-dark",
-    sindico: "from-primary to-lideranca-navy-dark",
-  };
+  const gradientClass = "from-primary to-lideranca-navy-dark";
 
   return (
     <section id="lead-form" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className={`bg-gradient-to-br ${gradientColors[serviceType]} rounded-3xl p-8 md:p-12 shadow-2xl`}>
+          <div className={`bg-gradient-to-br ${gradientClass} rounded-3xl p-8 md:p-12 shadow-2xl`}>
             <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
                 Solicite um Orçamento Gratuito

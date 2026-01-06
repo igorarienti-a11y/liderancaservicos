@@ -6,6 +6,7 @@ import CompactBenefits from "@/components/landing/CompactBenefits";
 import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
+import MobileCTAButton from "@/components/landing/MobileCTAButton";
 import heroImage from "@/assets/hero-facilities.jpg";
 import { Wrench, Users, Building2, Coffee } from "lucide-react";
 
@@ -60,6 +61,8 @@ const FacilitiesPage = () => {
         heroImage={heroImage}
         ctaText="Quero um Orçamento"
       />
+
+      <MobileCTAButton />
 
       <StatsSection stats={stats} />
 

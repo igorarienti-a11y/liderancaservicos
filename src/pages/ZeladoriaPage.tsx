@@ -46,7 +46,7 @@ const ZeladoriaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Zeladoria"
       heroSubtitle="Zeladores profissionais para cuidar do seu patrimônio. Supervisão, manutenção e cuidado integral do seu empreendimento."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_13@4x.jpg"
+      heroImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções em Zeladoria"
       services={services}

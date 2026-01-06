@@ -46,7 +46,7 @@ const TelefoniaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Telefonia"
       heroSubtitle="Atendimento telefônico profissional para sua empresa. Telefonistas treinados que representam sua marca com excelência."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_12@4x.jpg"
+      heroImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções em Telefonia"
       services={services}

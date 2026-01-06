@@ -46,7 +46,7 @@ const RecepcaoPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Recepção"
       heroSubtitle="Recepcionistas profissionais que representam sua marca. Atendimento elegante, cordial e eficiente para impressionar seus visitantes."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_14@4x.jpg"
+      heroImage="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções em Recepção"
       services={services}

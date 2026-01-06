@@ -46,7 +46,7 @@ const CopaCafePage = () => {
       heroTitle="Serviços de"
       heroHighlight="Copa e Café"
       heroSubtitle="Copeiros profissionais para manter sua copa sempre organizada. Serviço de café, água e atendimento em reuniões."
-      heroImage="https://www.lideranca.com.br/wp-content/uploads/2025/03/Copa-e-Cafe-768x750.jpg"
+      heroImage="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80"
       stats={stats}
       servicesTitle="Soluções para Copa"
       services={services}

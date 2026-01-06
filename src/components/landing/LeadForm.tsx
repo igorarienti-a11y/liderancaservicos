@@ -254,7 +254,8 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                     </>
                   ) : (
                     <>
-                      Solicitar Orçamento Gratuito
+                      <span className="hidden sm:inline">Solicitar Orçamento Gratuito</span>
+                      <span className="sm:hidden">Solicitar Orçamento</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"

@@ -156,7 +156,7 @@ const Index = () => {
                   </Button>
                 </Link>
                 <a href="tel:4837333100">
-                  <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-bold text-lg px-8 py-6">
+                  <Button size="lg" className="bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-bold text-lg px-8 py-6">
                     <Phone className="mr-2 h-5 w-5" />
                     Ligar Agora
                   </Button>
@@ -207,14 +207,13 @@ const Index = () => {
 
           {/* Toggle Button */}
           <div className="flex justify-center mb-8">
-            <Button
-              variant="outline"
+            <button
               onClick={() => setShowAllServices(!showAllServices)}
-              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+              className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-6 py-3 rounded-full font-medium text-sm hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
             >
-              <Grid3X3 className="mr-2 h-4 w-4" />
+              <Grid3X3 className="h-4 w-4" />
               {showAllServices ? "Ver carrossel" : "Ver todos os serviços"}
-            </Button>
+            </button>
           </div>
           
           {showAllServices ? (

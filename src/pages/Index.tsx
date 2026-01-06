@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star, Play } from "lucide-react";
+import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star, ChevronLeft, Grid3X3 } from "lucide-react";
 import logoLideranca from "@/assets/logo-lideranca.png";
+import heroBanner from "@/assets/hero-banner.png";
+import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef, useState } from "react";
 
 const services = [
   { title: "Limpeza e Conservação", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
@@ -71,6 +82,11 @@ const awards = [
 ];
 
 const Index = () => {
+  const [showAllServices, setShowAllServices] = useState(false);
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Top bar */}
@@ -121,26 +137,18 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section with Full Service tagline */}
-      <section className="bg-primary relative overflow-hidden py-16 md:py-24">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 max-w-2xl">
-              <p className="text-secondary font-semibold text-lg md:text-xl mb-3 uppercase tracking-wide">
-                Terceirizar para crescer
-              </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground mb-6 leading-tight">
-                O <span className="text-secondary italic">full</span><br />
-                <span className="text-secondary">SERVICE</span><br />
-                QUE DÁ <span className="text-secondary italic font-light">certo</span>
-              </h1>
-              <p className="text-primary-foreground/90 text-lg md:text-xl mb-8 max-w-xl">
-                Há mais de 30 anos oferecendo soluções completas em terceirização de mão de obra para empresas de todo o Brasil.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+      {/* Hero Section with Banner Image */}
+      <section className="relative w-full">
+        <img 
+          src={heroBanner}
+          alt="O full service que dá certo - Grupo Liderança"
+          className="w-full h-auto object-cover min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
+        />
+        {/* Overlay with stats */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent py-8">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-8">
                 <Link to="/facilities">
                   <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-lg px-8 py-6 shadow-button">
                     Solicite um Orçamento
@@ -155,83 +163,109 @@ const Index = () => {
                 </a>
               </div>
             </div>
-            
-            {/* Stats */}
-            <div className="flex-1 grid grid-cols-2 gap-6 max-w-md">
-              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
-                <MapPin className="h-8 w-8 text-secondary mx-auto mb-2" />
-                <p className="text-3xl font-bold text-secondary">27</p>
-                <p className="text-primary-foreground/80 text-sm">Estados atendidos</p>
-              </div>
-              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
-                <Users className="h-8 w-8 text-secondary mx-auto mb-2" />
-                <p className="text-3xl font-bold text-secondary">+32 mil</p>
-                <p className="text-primary-foreground/80 text-sm">Colaboradores</p>
-              </div>
-              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
-                <Building2 className="h-8 w-8 text-secondary mx-auto mb-2" />
-                <p className="text-3xl font-bold text-secondary">+1000</p>
-                <p className="text-primary-foreground/80 text-sm">Empresas atendidas</p>
-              </div>
-              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
-                <Award className="h-8 w-8 text-secondary mx-auto mb-2" />
-                <p className="text-3xl font-bold text-secondary">30+</p>
-                <p className="text-primary-foreground/80 text-sm">Anos de experiência</p>
-              </div>
-            </div>
           </div>
-        </div>
-        
-        {/* Decorative Yellow L */}
-        <div className="absolute left-0 bottom-0 hidden lg:block">
-          <div className="w-16 h-40 bg-secondary" />
-          <div className="w-32 h-4 bg-secondary -mt-4" />
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Stats Section */}
+      <section className="bg-primary py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <MapPin className="h-6 w-6 text-secondary mx-auto mb-2" />
+              <p className="text-2xl md:text-3xl font-bold text-secondary">27</p>
+              <p className="text-primary-foreground/80 text-sm">Estados atendidos</p>
+            </div>
+            <div className="text-center">
+              <Users className="h-6 w-6 text-secondary mx-auto mb-2" />
+              <p className="text-2xl md:text-3xl font-bold text-secondary">+32 mil</p>
+              <p className="text-primary-foreground/80 text-sm">Colaboradores</p>
+            </div>
+            <div className="text-center">
+              <Building2 className="h-6 w-6 text-secondary mx-auto mb-2" />
+              <p className="text-2xl md:text-3xl font-bold text-secondary">+1000</p>
+              <p className="text-primary-foreground/80 text-sm">Empresas atendidas</p>
+            </div>
+            <div className="text-center">
+              <Award className="h-6 w-6 text-secondary mx-auto mb-2" />
+              <p className="text-2xl md:text-3xl font-bold text-secondary">30+</p>
+              <p className="text-primary-foreground/80 text-sm">Anos de experiência</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Carousel */}
       <section id="servicos" className="bg-primary py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <p className="text-secondary font-semibold uppercase tracking-wide mb-2">Nossos Serviços</p>
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground">
               Soluções completas em terceirização
             </h2>
           </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 md:gap-4">
-            {services.map((service) => (
-              <Link
-                key={service.title}
-                to={service.link}
-                className="group relative overflow-hidden rounded-lg aspect-square"
-              >
-                {/* Image */}
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                
-                {/* Yellow accent corner */}
-                <div className="absolute bottom-0 left-0 w-full">
-                  <div className="h-1 bg-secondary" />
-                  <div className="absolute bottom-0 left-0 w-6 h-6 bg-secondary clip-corner" />
-                </div>
-                
-                {/* Title */}
-                <div className="absolute bottom-3 left-3 right-2">
-                  <h3 className="text-primary-foreground font-bold text-xs md:text-sm leading-tight group-hover:text-secondary transition-colors">
-                    {service.title}
-                  </h3>
-                </div>
-              </Link>
-            ))}
+
+          {/* Toggle Button */}
+          <div className="flex justify-center mb-8">
+            <Button
+              variant="outline"
+              onClick={() => setShowAllServices(!showAllServices)}
+              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+            >
+              <Grid3X3 className="mr-2 h-4 w-4" />
+              {showAllServices ? "Ver carrossel" : "Ver todos os serviços"}
+            </Button>
           </div>
+          
+          {showAllServices ? (
+            /* Grid View */
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 md:gap-4">
+              {services.map((service) => (
+                <Link
+                  key={service.title}
+                  to={service.link}
+                  className="group relative overflow-hidden rounded-lg aspect-square"
+                >
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            /* Carousel View */
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[autoplayPlugin.current]}
+              className="w-full max-w-6xl mx-auto"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {services.map((service, index) => (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+                    <Link
+                      to={service.link}
+                      className="group relative overflow-hidden rounded-lg aspect-square block"
+                    >
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    </Link>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-12 bg-secondary text-secondary-foreground hover:bg-secondary/90 border-none" />
+              <CarouselNext className="hidden md:flex -right-12 bg-secondary text-secondary-foreground hover:bg-secondary/90 border-none" />
+            </Carousel>
+          )}
 
           {/* CTA Button */}
           <div className="text-center mt-12">
@@ -323,17 +357,6 @@ const Index = () => {
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 Com mais de 32 mil colaboradores e presença em 27 estados, oferecemos soluções completas em mão de obra terceirizada para empresas de todos os portes e segmentos.
               </p>
-              <a 
-                href="https://www.youtube.com/watch?v=AN2ZjAzPlp0" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-primary font-semibold hover:text-primary/80 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                  <Play className="h-5 w-5 text-primary-foreground fill-primary-foreground ml-1" />
-                </div>
-                Assista ao vídeo institucional
-              </a>
             </div>
             <div className="flex-1">
               {/* Awards Grid */}
@@ -358,35 +381,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* Map Section with Brazil Map */}
       <section className="bg-muted py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-secondary font-semibold uppercase tracking-wide mb-2">
-              Onde estamos
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Presença em todo o Brasil
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Com filiais e escritórios estrategicamente localizados, oferecemos atendimento de qualidade em todos os 27 estados brasileiros.
-            </p>
-          </div>
-          
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
-            {["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"].map((state) => (
-              <span 
-                key={state}
-                className="bg-primary text-primary-foreground px-3 py-1 rounded text-sm font-medium"
-              >
-                {state}
-              </span>
-            ))}
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1 text-center lg:text-left">
+              <p className="text-secondary font-semibold uppercase tracking-wide mb-2">
+                Onde estamos
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Presença em todo o Brasil
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl">
+                Com filiais e escritórios estrategicamente localizados, oferecemos atendimento de qualidade em todos os 27 estados brasileiros.
+              </p>
+              
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
+                {["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"].map((state) => (
+                  <span 
+                    key={state}
+                    className="bg-primary text-primary-foreground px-3 py-1 rounded text-sm font-medium"
+                  >
+                    {state}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex-1 flex justify-center">
+              <BrazilMap className="w-64 h-64 md:w-80 md:h-80 text-primary" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section - Clean version without diagonal */}
       <section id="contato" className="bg-primary py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -402,7 +431,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <a 
                 href="tel:4837333100"
-                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors border border-primary-foreground/20"
+                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Phone className="h-8 w-8 text-secondary mx-auto mb-3" />
                 <p className="text-primary-foreground font-semibold">(48) 3733-3100</p>
@@ -411,7 +440,7 @@ const Index = () => {
               
               <a 
                 href="mailto:lideranca@lideranca.com.br"
-                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors border border-primary-foreground/20"
+                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Mail className="h-8 w-8 text-secondary mx-auto mb-3" />
                 <p className="text-primary-foreground font-semibold text-sm">lideranca@lideranca.com.br</p>
@@ -508,12 +537,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-
-      <style>{`
-        .clip-corner {
-          clip-path: polygon(0 100%, 100% 100%, 0 0);
-        }
-      `}</style>
     </div>
   );
 };

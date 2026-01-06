@@ -16,7 +16,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
   };
 
   return (
-    <>
+    <div className="hidden md:block">
       {/* Top bar with contact info */}
       <div className="bg-lideranca-navy-dark text-primary-foreground py-2 text-sm">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -65,7 +65,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
           </button>
         </div>
       </header>
-    </>
+    </div>
   );
 };
 

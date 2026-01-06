@@ -46,7 +46,7 @@ const SegurancaPatrimonialPage = () => {
       heroTitle="Segurança"
       heroHighlight="Patrimonial"
       heroSubtitle="Proteja seu patrimônio com vigilantes certificados. Monitoramento 24 horas, tecnologia de ponta e protocolos rigorosos."
-      heroImage="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_11@4x.jpg"
       stats={stats}
       servicesTitle="Soluções em Segurança"
       services={services}

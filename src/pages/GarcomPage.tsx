@@ -46,7 +46,7 @@ const GarcomPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Garçom"
       heroSubtitle="Garçons profissionais para eventos e serviços contínuos. Atendimento elegante que valoriza sua empresa e seus convidados."
-      heroImage="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+      heroImage="https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_5@4x.jpg"
       stats={stats}
       servicesTitle="Soluções para Eventos"
       services={services}

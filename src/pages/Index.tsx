@@ -1,30 +1,81 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star, Play } from "lucide-react";
 import logoLideranca from "@/assets/logo-lideranca.png";
+import { Button } from "@/components/ui/button";
 
 const services = [
-  { title: "Limpeza e Conservação", link: "/limpeza-conservacao", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80" },
-  { title: "Segurança Patrimonial", link: "/seguranca-patrimonial", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=80" },
-  { title: "Ascensorista", link: "/ascensorista", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" },
-  { title: "Copa e Café", link: "/copa-cafe", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" },
-  { title: "Cozinheira", link: "/cozinheira", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&q=80" },
-  { title: "Digitação", link: "/digitacao", image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400&q=80" },
-  { title: "Garçom", link: "/garcom", image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" },
-  { title: "Jardinagem", link: "/jardinagem", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80" },
-  { title: "Mão de Obra em Geral", link: "/mao-de-obra", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80" },
-  { title: "Motorista", link: "/motorista", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&q=80" },
-  { title: "Portaria", link: "/portaria", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80" },
-  { title: "Recepção", link: "/recepcao", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&q=80" },
-  { title: "Telefonia", link: "/telefonia", image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=400&q=80" },
-  { title: "Zeladoria", link: "/zeladoria", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80" },
+  { title: "Limpeza e Conservação", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
+  { title: "Segurança Patrimonial", link: "/seguranca-patrimonial", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_11@4x.jpg" },
+  { title: "Ascensorista", link: "/ascensorista", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_1@4x.jpg" },
+  { title: "Copa e Café", link: "/copa-cafe", image: "https://www.lideranca.com.br/wp-content/uploads/2025/03/Copa-e-Cafe-768x750.jpg" },
+  { title: "Cozinheira", link: "/cozinheira", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_3@4x.jpg" },
+  { title: "Digitação", link: "/digitacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_4@4x.jpg" },
+  { title: "Garçom", link: "/garcom", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_5@4x.jpg" },
+  { title: "Jardinagem", link: "/jardinagem", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_6@4x.jpg" },
+  { title: "Mão de Obra em Geral", link: "/mao-de-obra", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_8@4x.jpg" },
+  { title: "Motorista", link: "/motorista", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_9@4x.jpg" },
+  { title: "Portaria", link: "/portaria", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_10@4x.jpg" },
+  { title: "Recepção", link: "/recepcao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_14@4x.jpg" },
+  { title: "Telefonia", link: "/telefonia", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_12@4x.jpg" },
+  { title: "Zeladoria", link: "/zeladoria", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_13@4x.jpg" },
+];
+
+const testimonials = [
+  {
+    text: "Simplicidade, proximidade e agilidade têm sido os pilares do relacionamento. Grata surpresa na prestação de serviços no Oeste de Santa Catarina.",
+    name: "Bruno Laures",
+    company: "Kellogg's - Santa Catarina",
+    logo: "https://www.lideranca.com.br/wp-content/uploads/2023/04/kelloggs-logo-1.png"
+  },
+  {
+    text: "Acompanho o crescimento da LIMGER (Grupo Liderança) durante muitos anos. Sempre nos atenderam com qualidade, profissionalismo e agilidade.",
+    name: "Claudio Lopes de Oliveira",
+    company: "BRF - Serafina Correa/RS",
+    logo: "https://www.lideranca.com.br/wp-content/uploads/2023/04/brf-logo.png"
+  },
+  {
+    text: "Presta um atendimento excelente, com profissionais competentes, atenciosos e prestativos. Sempre dispostos a nos ajudar.",
+    name: "Ingrid Costa Santos",
+    company: "Pernambucanas",
+    logo: "https://www.lideranca.com.br/wp-content/uploads/2023/04/Pernambucanas.png"
+  },
+  {
+    text: "Colaboradoras da limpeza são organizadas, deixam os ambientes limpos, são pontuais e muito caprichosas.",
+    name: "Leandro Souza",
+    company: "Gol Linhas Aéreas - Florianópolis/SC",
+    logo: "https://www.lideranca.com.br/wp-content/uploads/2023/04/gol-1-1.png"
+  },
+];
+
+const awards = [
+  {
+    image: "https://www.lideranca.com.br/wp-content/uploads/2024/10/image-6.png",
+    title: "Great Place to Work",
+    description: "Entre as melhores empresas para se trabalhar no setor."
+  },
+  {
+    image: "https://www.lideranca.com.br/wp-content/uploads/2024/10/respsocial_alesc-1.png",
+    title: "Responsabilidade Social Alesc",
+    description: "Uma empresa preocupada com a responsabilidade socioambiental."
+  },
+  {
+    image: "https://www.lideranca.com.br/wp-content/uploads/2024/10/image-7.png",
+    title: "500 Maiores do Sul",
+    description: "Entre as maiores empresas do Sul e a com maior receita líquida do setor."
+  },
+  {
+    image: "https://www.lideranca.com.br/wp-content/uploads/2024/10/image-8.png",
+    title: "Melhor em Satisfação",
+    description: "Reconhecida pelos serviços de qualidade prestados nos clientes."
+  },
 ];
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* Top bar */}
       <div className="bg-lideranca-navy-dark text-primary-foreground py-2 text-sm">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-4 md:gap-6">
             <a href="tel:4837333100" className="flex items-center gap-2 hover:text-secondary transition-colors">
               <Phone className="h-4 w-4" />
@@ -36,41 +87,119 @@ const Index = () => {
               lideranca@lideranca.com.br
             </a>
           </div>
+          <div className="flex items-center gap-4 text-xs">
+            <a href="https://www.lideranca.com.br/vaga/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+              Vagas
+            </a>
+            <a href="https://curriculos.lideranca.com.br:8084/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+              Cadastre seu currículo
+            </a>
+            <a href="http://colaborador.lideranca.com.br/" target="_blank" rel="noopener noreferrer" className="border border-primary-foreground/50 px-3 py-1 rounded hover:bg-primary-foreground/10 transition-colors">
+              Portal do Colaborador
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="bg-primary relative overflow-hidden py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          {/* Logo */}
-          <div className="mb-10 md:mb-16">
+      {/* Header */}
+      <header className="bg-primary py-4">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <Link to="/">
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
               className="h-12 md:h-16 w-auto brightness-0 invert"
             />
-          </div>
+          </Link>
+          <nav className="hidden lg:flex items-center gap-6">
+            <Link to="/" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Início</Link>
+            <Link to="/facilities" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Liderança</Link>
+            <a href="#servicos" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Nossos Serviços</a>
+            <a href="#depoimentos" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Depoimentos</a>
+            <a href="#contato" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Contato</a>
+          </nav>
+        </div>
+      </header>
 
-          {/* Main content */}
-          <div className="max-w-3xl mb-10 md:mb-16">
-            <h2 className="text-secondary font-semibold text-lg md:text-xl mb-2">
-              Terceirizar para crescer
-            </h2>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4 leading-tight">
-              BUSQUE A LIDERANÇA E{" "}
-              <span className="text-secondary">FOQUE NO SEU CORE</span>
-            </h1>
-            <p className="text-primary-foreground/80 text-base md:text-lg">
-              Há mais de 30 anos oferecendo soluções completas em terceirização para empresas de todo o Brasil.
-            </p>
+      {/* Hero Section with Full Service tagline */}
+      <section className="bg-primary relative overflow-hidden py-16 md:py-24">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/80" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1 max-w-2xl">
+              <p className="text-secondary font-semibold text-lg md:text-xl mb-3 uppercase tracking-wide">
+                Terceirizar para crescer
+              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground mb-6 leading-tight">
+                O <span className="text-secondary italic">full</span><br />
+                <span className="text-secondary">SERVICE</span><br />
+                QUE DÁ <span className="text-secondary italic font-light">certo</span>
+              </h1>
+              <p className="text-primary-foreground/90 text-lg md:text-xl mb-8 max-w-xl">
+                Há mais de 30 anos oferecendo soluções completas em terceirização de mão de obra para empresas de todo o Brasil.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/facilities">
+                  <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-lg px-8 py-6 shadow-button">
+                    Solicite um Orçamento
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <a href="tel:4837333100">
+                  <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-bold text-lg px-8 py-6">
+                    <Phone className="mr-2 h-5 w-5" />
+                    Ligar Agora
+                  </Button>
+                </a>
+              </div>
+            </div>
+            
+            {/* Stats */}
+            <div className="flex-1 grid grid-cols-2 gap-6 max-w-md">
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
+                <MapPin className="h-8 w-8 text-secondary mx-auto mb-2" />
+                <p className="text-3xl font-bold text-secondary">27</p>
+                <p className="text-primary-foreground/80 text-sm">Estados atendidos</p>
+              </div>
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
+                <Users className="h-8 w-8 text-secondary mx-auto mb-2" />
+                <p className="text-3xl font-bold text-secondary">+32 mil</p>
+                <p className="text-primary-foreground/80 text-sm">Colaboradores</p>
+              </div>
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
+                <Building2 className="h-8 w-8 text-secondary mx-auto mb-2" />
+                <p className="text-3xl font-bold text-secondary">+1000</p>
+                <p className="text-primary-foreground/80 text-sm">Empresas atendidas</p>
+              </div>
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center border border-primary-foreground/20">
+                <Award className="h-8 w-8 text-secondary mx-auto mb-2" />
+                <p className="text-3xl font-bold text-secondary">30+</p>
+                <p className="text-primary-foreground/80 text-sm">Anos de experiência</p>
+              </div>
+            </div>
           </div>
+        </div>
+        
+        {/* Decorative Yellow L */}
+        <div className="absolute left-0 bottom-0 hidden lg:block">
+          <div className="w-16 h-40 bg-secondary" />
+          <div className="w-32 h-4 bg-secondary -mt-4" />
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="bg-primary pb-16 md:pb-24">
+      <section id="servicos" className="bg-primary py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
+          <div className="text-center mb-12">
+            <p className="text-secondary font-semibold uppercase tracking-wide mb-2">Nossos Serviços</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground">
+              Soluções completas em terceirização
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 md:gap-4">
             {services.map((service) => (
               <Link
                 key={service.title}
@@ -82,20 +211,21 @@ const Index = () => {
                   src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 
                 {/* Yellow accent corner */}
                 <div className="absolute bottom-0 left-0 w-full">
                   <div className="h-1 bg-secondary" />
-                  <div className="absolute bottom-0 left-0 w-8 h-8 bg-secondary clip-corner" />
+                  <div className="absolute bottom-0 left-0 w-6 h-6 bg-secondary clip-corner" />
                 </div>
                 
                 {/* Title */}
-                <div className="absolute bottom-3 left-3 right-3">
-                  <h3 className="text-primary-foreground font-bold text-sm md:text-base leading-tight">
+                <div className="absolute bottom-3 left-3 right-2">
+                  <h3 className="text-primary-foreground font-bold text-xs md:text-sm leading-tight group-hover:text-secondary transition-colors">
                     {service.title}
                   </h3>
                 </div>
@@ -105,28 +235,276 @@ const Index = () => {
 
           {/* CTA Button */}
           <div className="text-center mt-12">
-            <Link
-              to="/facilities"
-              className="inline-block bg-secondary text-primary font-bold px-8 py-4 rounded hover:bg-secondary/90 transition-colors text-lg"
-            >
-              Solicite um Orçamento
+            <Link to="/facilities">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-lg px-10 py-6 shadow-button">
+                Solicite um Orçamento
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-lideranca-navy-dark py-8 mt-auto">
+      {/* Testimonials Section */}
+      <section id="depoimentos" className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <img
-              src={logoLideranca}
-              alt="Grupo Liderança"
-              className="h-10 w-auto brightness-0 invert"
-            />
+          <div className="text-center mb-12">
+            <p className="text-secondary font-semibold uppercase tracking-wide mb-2">
+              Veja a opinião de quem conhece
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Eles escolheram a Liderança
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index}
+                className="bg-card p-6 rounded-lg shadow-card hover:shadow-hover transition-shadow border border-border"
+              >
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  "{testimonial.text}"
+                </p>
+                <div className="border-t border-border pt-4">
+                  <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                  <p className="text-muted-foreground text-xs">{testimonial.company}</p>
+                  <img 
+                    src={testimonial.logo} 
+                    alt={testimonial.company}
+                    className="h-8 mt-3 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-primary py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              Simule seu orçamento!
+            </h2>
+            <p className="text-primary-foreground/80 text-lg mb-8">
+              Solicite um orçamento e nossa equipe comercial irá montar a melhor proposta adequada para as suas necessidades.
+            </p>
+            <Link to="/facilities">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-lg px-10 py-6 shadow-button">
+                Solicite um Orçamento
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1">
+              <p className="text-secondary font-semibold uppercase tracking-wide mb-2">
+                Conheça a Liderança
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                30 anos de excelência em terceirização
+              </h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Atuamos desde 1995 no competitivo segmento da terceirização. São 30 anos em busca de inovação e aprimoramento das nossas entregas, que transformaram a marca Liderança em referência de excelência no setor.
+              </p>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Com mais de 32 mil colaboradores e presença em 27 estados, oferecemos soluções completas em mão de obra terceirizada para empresas de todos os portes e segmentos.
+              </p>
+              <a 
+                href="https://www.youtube.com/watch?v=AN2ZjAzPlp0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 text-primary font-semibold hover:text-primary/80 transition-colors"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                  <Play className="h-5 w-5 text-primary-foreground fill-primary-foreground ml-1" />
+                </div>
+                Assista ao vídeo institucional
+              </a>
+            </div>
+            <div className="flex-1">
+              {/* Awards Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {awards.map((award, index) => (
+                  <div 
+                    key={index}
+                    className="bg-card p-4 rounded-lg text-center shadow-card border border-border"
+                  >
+                    <img 
+                      src={award.image} 
+                      alt={award.title}
+                      className="h-16 mx-auto mb-3 object-contain"
+                    />
+                    <h3 className="font-semibold text-foreground text-sm mb-1">{award.title}</h3>
+                    <p className="text-muted-foreground text-xs">{award.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="bg-muted py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-secondary font-semibold uppercase tracking-wide mb-2">
+              Onde estamos
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Presença em todo o Brasil
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Com filiais e escritórios estrategicamente localizados, oferecemos atendimento de qualidade em todos os 27 estados brasileiros.
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+            {["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"].map((state) => (
+              <span 
+                key={state}
+                className="bg-primary text-primary-foreground px-3 py-1 rounded text-sm font-medium"
+              >
+                {state}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contato" className="bg-primary py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+                Entre em contato
+              </h2>
+              <p className="text-primary-foreground/80 text-lg">
+                Nossa equipe está pronta para atender sua empresa
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a 
+                href="tel:4837333100"
+                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors border border-primary-foreground/20"
+              >
+                <Phone className="h-8 w-8 text-secondary mx-auto mb-3" />
+                <p className="text-primary-foreground font-semibold">(48) 3733-3100</p>
+                <p className="text-primary-foreground/70 text-sm">Ligue agora</p>
+              </a>
+              
+              <a 
+                href="mailto:lideranca@lideranca.com.br"
+                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-primary-foreground/20 transition-colors border border-primary-foreground/20"
+              >
+                <Mail className="h-8 w-8 text-secondary mx-auto mb-3" />
+                <p className="text-primary-foreground font-semibold text-sm">lideranca@lideranca.com.br</p>
+                <p className="text-primary-foreground/70 text-sm">Envie um e-mail</p>
+              </a>
+              
+              <Link 
+                to="/facilities"
+                className="bg-secondary p-6 rounded-lg text-center hover:bg-secondary/90 transition-colors"
+              >
+                <ChevronRight className="h-8 w-8 text-secondary-foreground mx-auto mb-3" />
+                <p className="text-secondary-foreground font-semibold">Solicite um Orçamento</p>
+                <p className="text-secondary-foreground/70 text-sm">Preencha o formulário</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-lideranca-navy-dark py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            {/* Logo and Info */}
+            <div>
+              <img
+                src={logoLideranca}
+                alt="Grupo Liderança"
+                className="h-12 w-auto brightness-0 invert mb-4"
+              />
+              <p className="text-primary-foreground/60 text-sm">
+                Compromisso com seu bem-estar há mais de 30 anos.
+              </p>
+            </div>
+            
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-primary-foreground font-semibold mb-4">Links Rápidos</h4>
+              <ul className="space-y-2">
+                <li><Link to="/" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Início</Link></li>
+                <li><Link to="/facilities" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">A Liderança</Link></li>
+                <li><a href="#servicos" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Nossos Serviços</a></li>
+                <li><a href="#contato" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Contato</a></li>
+              </ul>
+            </div>
+            
+            {/* Services */}
+            <div>
+              <h4 className="text-primary-foreground font-semibold mb-4">Serviços</h4>
+              <ul className="space-y-2">
+                <li><Link to="/limpeza-conservacao" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Limpeza e Conservação</Link></li>
+                <li><Link to="/seguranca-patrimonial" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Segurança Patrimonial</Link></li>
+                <li><Link to="/portaria" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Portaria</Link></li>
+                <li><Link to="/recepcao" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors">Recepção</Link></li>
+              </ul>
+            </div>
+            
+            {/* Contact */}
+            <div>
+              <h4 className="text-primary-foreground font-semibold mb-4">Contato</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="tel:4837333100" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors flex items-center gap-2">
+                    <Phone className="h-4 w-4" /> (48) 3733-3100
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:lideranca@lideranca.com.br" className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors flex items-center gap-2">
+                    <Mail className="h-4 w-4" /> lideranca@lideranca.com.br
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-primary-foreground/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-primary-foreground/60 text-sm text-center">
               © {new Date().getFullYear()} Grupo Liderança. Todos os direitos reservados.
             </p>
+            <div className="flex gap-4">
+              <a href="https://www.facebook.com/grupolideranca" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-secondary transition-colors">
+                Facebook
+              </a>
+              <a href="https://www.instagram.com/lideranca_servicos/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-secondary transition-colors">
+                Instagram
+              </a>
+              <a href="https://www.linkedin.com/company/lideranca-servicos/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-secondary transition-colors">
+                LinkedIn
+              </a>
+              <a href="https://www.youtube.com/user/lideraservicos" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-secondary transition-colors">
+                YouTube
+              </a>
+            </div>
           </div>
         </div>
       </footer>

@@ -63,10 +63,13 @@ export default {
         lideranca: {
           navy: "hsl(var(--lideranca-navy))",
           "navy-dark": "hsl(var(--lideranca-navy-dark))",
+          "navy-light": "hsl(var(--lideranca-navy-light))",
           yellow: "hsl(var(--lideranca-yellow))",
           "yellow-light": "hsl(var(--lideranca-yellow-light))",
+          "yellow-dark": "hsl(var(--lideranca-yellow-dark))",
           gray: "hsl(var(--lideranca-gray))",
           "gray-dark": "hsl(var(--lideranca-gray-dark))",
+          "blue-glow": "hsl(var(--lideranca-blue-glow))",
         },
       },
       borderRadius: {

@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-import heroImage from "@/assets/hero-facilities.jpg";
+const heroImage = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
 import { Wrench, Users, Building2, Coffee } from "lucide-react";
 
 const FacilitiesPage = () => {

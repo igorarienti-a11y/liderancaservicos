@@ -34,6 +34,9 @@ const HeroSection = ({
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/60 md:to-primary/70" />
       </div>
+      
+      {/* Blue shadow fade for mobile - blends with section below */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />
 
       <div className="container mx-auto px-4 relative z-10 py-8 md:py-12">
         <div className="max-w-3xl">

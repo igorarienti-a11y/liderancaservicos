@@ -144,6 +144,8 @@ const Index = () => {
           alt="O full service que dá certo - Grupo Liderança"
           className="w-full h-auto object-cover object-left md:object-center min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
         />
+        {/* Blue shadow fade for mobile - blends with section below */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />
         {/* Overlay with buttons - hidden on mobile */}
         <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent py-8">
           <div className="container mx-auto px-4">

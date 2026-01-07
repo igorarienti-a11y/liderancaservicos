@@ -84,7 +84,7 @@ const awards = [
 const Index = () => {
   const [showAllServices, setShowAllServices] = useState(false);
   const autoplayPlugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
+    Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   return (

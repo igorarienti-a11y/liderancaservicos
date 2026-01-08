@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Wine, Users, Utensils, Calendar } from "lucide-react";
+import heroGarcom from "@/assets/hero-garcom.png";
 
 const GarcomPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const GarcomPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Garçom"
       heroSubtitle="Garçons profissionais para eventos e serviços contínuos. Atendimento elegante que valoriza sua empresa e seus convidados."
-      heroImage="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroGarcom}
       stats={stats}
       servicesTitle="Soluções para Eventos"
       services={services}

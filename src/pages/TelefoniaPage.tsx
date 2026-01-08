@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Phone, Headphones, Users, Clock } from "lucide-react";
+import heroTelefonia from "@/assets/hero-telefonia.png";
 
 const TelefoniaPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const TelefoniaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Telefonia"
       heroSubtitle="Atendimento telefônico profissional para sua empresa. Telefonistas treinados que representam sua marca com excelência."
-      heroImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroTelefonia}
       stats={stats}
       servicesTitle="Soluções em Telefonia"
       services={services}

@@ -35,10 +35,10 @@ const LimpezaPage = () => {
   ];
 
   const stats = [
-    { value: "30+", label: "Anos de experiência" },
-    { value: "15 mil+", label: "Profissionais de limpeza" },
-    { value: "98%", label: "Satisfação dos clientes" },
-    { value: "500+", label: "Contratos ativos" },
+    { value: "30", label: "Anos de experiência" },
+    { value: "32 mil", label: "Colaboradores" },
+    { value: "27", label: "Estados atendidos" },
+    { value: "1000+", label: "Clientes satisfeitos" },
   ];
 
   const benefits = [

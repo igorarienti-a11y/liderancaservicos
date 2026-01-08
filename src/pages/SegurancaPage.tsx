@@ -35,10 +35,10 @@ const SegurancaPage = () => {
   ];
 
   const stats = [
-    { value: "30+", label: "Anos de experiência" },
-    { value: "8 mil+", label: "Vigilantes certificados" },
-    { value: "< 5 min", label: "Tempo de resposta" },
-    { value: "300+", label: "Contratos ativos" },
+    { value: "30", label: "Anos de experiência" },
+    { value: "32 mil", label: "Colaboradores" },
+    { value: "27", label: "Estados atendidos" },
+    { value: "1000+", label: "Clientes satisfeitos" },
   ];
 
   const benefits = [

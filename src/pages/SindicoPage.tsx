@@ -35,10 +35,10 @@ const SindicoPage = () => {
   ];
 
   const stats = [
-    { value: "30+", label: "Anos de experiência" },
-    { value: "200+", label: "Condomínios atendidos" },
-    { value: "25%", label: "Redução média de custos" },
-    { value: "95%", label: "Aprovação em assembleias" },
+    { value: "30", label: "Anos de experiência" },
+    { value: "32 mil", label: "Colaboradores" },
+    { value: "27", label: "Estados atendidos" },
+    { value: "1000+", label: "Clientes satisfeitos" },
   ];
 
   const benefits = [

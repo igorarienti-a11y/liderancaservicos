@@ -26,10 +26,10 @@ const GarcomPage = () => {
   ];
 
   const stats = [
-    { value: "30+", label: "Anos de experiência" },
+    { value: "30", label: "Anos de experiência" },
+    { value: "32 mil", label: "Colaboradores" },
     { value: "27", label: "Estados atendidos" },
-    { value: "100%", label: "Profissionalismo" },
-    { value: "1000+", label: "Eventos atendidos" },
+    { value: "1000+", label: "Clientes satisfeitos" },
   ];
 
   const benefits = [

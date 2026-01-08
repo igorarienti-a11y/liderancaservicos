@@ -30,7 +30,7 @@ const HeroSection = ({
         <img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover object-[70%_top] md:object-center"
+          className="w-full h-full object-cover object-[70%_top] md:object-[center_top]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/40 md:from-primary/40 md:via-transparent md:to-transparent" />
       </div>

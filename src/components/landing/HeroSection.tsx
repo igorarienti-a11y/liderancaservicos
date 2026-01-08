@@ -32,7 +32,7 @@ const HeroSection = ({
           alt=""
           className="w-full h-full object-cover object-[70%_center] md:object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/40 md:from-primary/40 md:via-transparent md:to-transparent" />
       </div>
       
       {/* Blue shadow fade for mobile - blends with section below */}

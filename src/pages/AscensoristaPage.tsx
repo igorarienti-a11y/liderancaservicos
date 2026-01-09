@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { ArrowUpDown, Users, Clock, Shield } from "lucide-react";
+import heroAscensorista from "@/assets/hero-ascensorista.png";
 
 const AscensoristaPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const AscensoristaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Ascensorista"
       heroSubtitle="Operadores de elevador profissionais para seu edifício. Atendimento cordial, segurança e eficiência no transporte vertical."
-      heroImage="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroAscensorista}
       stats={stats}
       servicesTitle="Soluções para Elevadores"
       services={services}

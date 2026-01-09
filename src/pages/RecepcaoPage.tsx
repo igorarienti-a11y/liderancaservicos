@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Phone, Users, Calendar, Smile } from "lucide-react";
+import heroRecepcao from "@/assets/hero-recepcao.png";
 
 const RecepcaoPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const RecepcaoPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Recepção"
       heroSubtitle="Recepcionistas profissionais que representam sua marca. Atendimento elegante, cordial e eficiente para impressionar seus visitantes."
-      heroImage="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroRecepcao}
       stats={stats}
       servicesTitle="Soluções em Recepção"
       services={services}

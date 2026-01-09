@@ -43,6 +43,7 @@ import heroJardinagem from "@/assets/hero-jardinagem.png";
 import heroMaoDeObra from "@/assets/hero-mao-de-obra.png";
 import heroMotorista from "@/assets/hero-motorista.png";
 import heroZeladoria from "@/assets/hero-zeladoria.png";
+import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.png";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () => {
       heroMaoDeObra,
       heroMotorista,
       heroZeladoria,
+      heroSegurancaPatrimonial,
     ]);
   }, []);
 

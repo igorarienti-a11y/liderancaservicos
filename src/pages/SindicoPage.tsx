@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-import heroImage from "@/assets/hero-sindico.jpg";
+import heroImage from "@/assets/hero-portaria.png";
 import { Users, Calendar, Wrench, DollarSign } from "lucide-react";
 
 const SindicoPage = () => {

@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Coffee, Utensils, Users, Clock } from "lucide-react";
+import heroCopaCafe from "@/assets/hero-copa-cafe.png";
 
 const CopaCafePage = () => {
   const services = [
@@ -46,7 +47,7 @@ const CopaCafePage = () => {
       heroTitle="Serviços de"
       heroHighlight="Copa e Café"
       heroSubtitle="Copeiros profissionais para manter sua copa sempre organizada. Serviço de café, água e atendimento em reuniões."
-      heroImage="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroCopaCafe}
       stats={stats}
       servicesTitle="Soluções para Copa"
       services={services}

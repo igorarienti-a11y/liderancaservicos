@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Home, Wrench, ClipboardCheck, Eye } from "lucide-react";
+import heroZeladoria from "@/assets/hero-zeladoria.png";
 
 const ZeladoriaPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const ZeladoriaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Zeladoria"
       heroSubtitle="Zeladores profissionais para cuidar do seu patrimônio. Supervisão, manutenção e cuidado integral do seu empreendimento."
-      heroImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroZeladoria}
       stats={stats}
       servicesTitle="Soluções em Zeladoria"
       services={services}

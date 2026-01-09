@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Car, Truck, Clock, Shield } from "lucide-react";
+import heroMotorista from "@/assets/hero-motorista.png";
 
 const MotoristaPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const MotoristaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Motorista"
       heroSubtitle="Motoristas profissionais para transporte executivo e de cargas. Segurança, pontualidade e eficiência no trânsito."
-      heroImage="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroMotorista}
       stats={stats}
       servicesTitle="Soluções em Transporte"
       services={services}

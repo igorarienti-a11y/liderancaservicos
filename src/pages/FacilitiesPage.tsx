@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-const heroImage = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
+import heroFacilities from "@/assets/hero-facilities-new.png";
 import { Wrench, Users, Building2, Coffee } from "lucide-react";
 
 const FacilitiesPage = () => {
@@ -58,7 +58,7 @@ const FacilitiesPage = () => {
         title="Gestão Completa de"
         highlight="Facilities"
         subtitle="Terceirize a gestão do seu empreendimento com quem tem mais de 30 anos de experiência. Foque no seu negócio enquanto cuidamos de tudo."
-        heroImage={heroImage}
+        heroImage={heroFacilities}
         ctaText="Quero um Orçamento"
       />
 

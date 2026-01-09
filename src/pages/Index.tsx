@@ -83,7 +83,6 @@ const awards = [
 
 const Index = () => {
   const [showAllServices, setShowAllServices] = useState(false);
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const autoplayPlugin = useRef(
     Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
@@ -143,10 +142,7 @@ const Index = () => {
         <img 
           src={heroBanner}
           alt="O full service que dá certo - Grupo Liderança"
-          className={`w-full h-auto object-cover object-left md:object-center min-h-[300px] md:min-h-[500px] lg:min-h-[600px] transition-opacity duration-500 ${
-            heroImageLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          onLoad={() => setHeroImageLoaded(true)}
+          className="w-full h-auto object-cover object-left md:object-center min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
         />
         {/* Blue shadow fade for mobile - blends with section below */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />

@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Shield, Camera, DoorOpen, Users } from "lucide-react";
+import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.png";
 
 const SegurancaPatrimonialPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const SegurancaPatrimonialPage = () => {
       heroTitle="Segurança"
       heroHighlight="Patrimonial"
       heroSubtitle="Proteja seu patrimônio com vigilantes certificados. Monitoramento 24 horas, tecnologia de ponta e protocolos rigorosos."
-      heroImage="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroSegurancaPatrimonial}
       stats={stats}
       servicesTitle="Soluções em Segurança"
       services={services}

@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { preloadImages } from "@/hooks/use-image-preload";
 import Index from "./pages/Index";
 import FacilitiesPage from "./pages/FacilitiesPage";
 import LimpezaPage from "./pages/LimpezaPage";
@@ -24,9 +26,21 @@ import PortariaPage from "./pages/PortariaPage";
 import RecepcaoPage from "./pages/RecepcaoPage";
 import NotFound from "./pages/NotFound";
 
+// Import hero images for preloading
+import heroBanner from "@/assets/hero-banner.png";
+import heroFacilities from "@/assets/hero-facilities-new.png";
+import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
+import heroSeguranca from "@/assets/hero-seguranca-new.png";
+
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  // Preload critical hero images on app start
+  useEffect(() => {
+    preloadImages([heroBanner, heroFacilities, heroLimpeza, heroSeguranca]);
+  }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -57,7 +71,8 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+};
 
 export default App;

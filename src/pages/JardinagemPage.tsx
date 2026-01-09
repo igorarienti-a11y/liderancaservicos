@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Trees, Leaf, Scissors, Droplets } from "lucide-react";
+import heroJardinagem from "@/assets/hero-jardinagem.png";
 
 const JardinagemPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const JardinagemPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Jardinagem"
       heroSubtitle="Jardineiros profissionais para manter suas áreas verdes sempre bonitas. Manutenção, podas e paisagismo completo."
-      heroImage="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroJardinagem}
       stats={stats}
       servicesTitle="Soluções em Jardinagem"
       services={services}

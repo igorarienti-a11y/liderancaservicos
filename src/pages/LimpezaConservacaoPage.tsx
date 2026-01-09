@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Sparkles, Building, Factory, HeartPulse } from "lucide-react";
+import heroLimpezaConservacao from "@/assets/hero-limpeza-conservacao.png";
 
 const LimpezaConservacaoPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const LimpezaConservacaoPage = () => {
       heroTitle="Limpeza e"
       heroHighlight="Conservação"
       heroSubtitle="Ambientes limpos e conservados que impressionam. Equipes especializadas para manter seu espaço sempre impecável."
-      heroImage="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroLimpezaConservacao}
       stats={stats}
       servicesTitle="Soluções em Limpeza"
       services={services}

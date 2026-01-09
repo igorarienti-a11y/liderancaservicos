@@ -48,6 +48,7 @@ const LimpezaConservacaoPage = () => {
       heroHighlight="Conservação"
       heroSubtitle="Ambientes limpos e conservados que impressionam. Equipes especializadas para manter seu espaço sempre impecável."
       heroImage={heroLimpezaConservacao}
+      mobileImagePosition="100%"
       stats={stats}
       servicesTitle="Soluções em Limpeza"
       services={services}

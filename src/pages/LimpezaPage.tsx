@@ -60,6 +60,7 @@ const LimpezaPage = () => {
         subtitle="Ambientes impecáveis que impressionam. Equipe especializada, produtos de qualidade e processos certificados."
         heroImage={heroLimpeza}
         ctaText="Quero um Orçamento"
+        mobileImagePosition="100%"
       />
 
       <MobileCTAButton />

@@ -32,7 +32,7 @@ interface ServicePageTemplateProps {
   heroSubtitle: string;
   heroImage: string;
   ctaText?: string;
-  
+  mobileImagePosition?: string;
   // Stats
   stats: Stat[];
   
@@ -61,6 +61,7 @@ const ServicePageTemplate = ({
   heroSubtitle,
   heroImage,
   ctaText = "Solicitar Orçamento",
+  mobileImagePosition,
   stats,
   servicesTitle,
   services,
@@ -83,6 +84,7 @@ const ServicePageTemplate = ({
         subtitle={heroSubtitle}
         heroImage={heroImage}
         ctaText={ctaText}
+        mobileImagePosition={mobileImagePosition}
       />
 
       <MobileCTAButton />

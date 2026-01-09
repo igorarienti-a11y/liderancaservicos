@@ -31,13 +31,42 @@ import heroBanner from "@/assets/hero-banner.png";
 import heroFacilities from "@/assets/hero-facilities-new.png";
 import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
 import heroSeguranca from "@/assets/hero-seguranca-new.png";
+import heroTelefonia from "@/assets/hero-telefonia.png";
+import heroPortaria from "@/assets/hero-portaria.png";
+import heroRecepcao from "@/assets/hero-recepcao.png";
+import heroAscensorista from "@/assets/hero-ascensorista.png";
+import heroCopaCafe from "@/assets/hero-copa-cafe.png";
+import heroCozinheira from "@/assets/hero-cozinheira.png";
+import heroDigitacao from "@/assets/hero-digitacao.png";
+import heroGarcom from "@/assets/hero-garcom.png";
+import heroJardinagem from "@/assets/hero-jardinagem.png";
+import heroMaoDeObra from "@/assets/hero-mao-de-obra.png";
+import heroMotorista from "@/assets/hero-motorista.png";
+import heroZeladoria from "@/assets/hero-zeladoria.png";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Preload critical hero images on app start
+  // Preload all hero images on app start
   useEffect(() => {
-    preloadImages([heroBanner, heroFacilities, heroLimpeza, heroSeguranca]);
+    preloadImages([
+      heroBanner,
+      heroFacilities,
+      heroLimpeza,
+      heroSeguranca,
+      heroTelefonia,
+      heroPortaria,
+      heroRecepcao,
+      heroAscensorista,
+      heroCopaCafe,
+      heroCozinheira,
+      heroDigitacao,
+      heroGarcom,
+      heroJardinagem,
+      heroMaoDeObra,
+      heroMotorista,
+      heroZeladoria,
+    ]);
   }, []);
 
   return (

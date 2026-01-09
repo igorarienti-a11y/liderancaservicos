@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, ChevronRight } from "lucide-react";
 
@@ -18,6 +19,8 @@ const HeroSection = ({
   ctaText = "Solicitar Orçamento",
   mobileImagePosition = "70%",
 }: HeroSectionProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   const scrollToForm = () => {
     const formElement = document.getElementById("lead-form");
     if (formElement) {
@@ -26,14 +29,17 @@ const HeroSection = ({
   };
 
   return (
-    <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-primary">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover md:object-[center_top]"
+          className={`w-full h-full object-cover md:object-[center_top] transition-opacity duration-500 ${
+            imageLoaded ? "opacity-100" : "opacity-0"
+          }`}
           style={{ objectPosition: `${mobileImagePosition} top` }}
+          onLoad={() => setImageLoaded(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/40 md:from-primary/40 md:via-transparent md:to-transparent" />
       </div>

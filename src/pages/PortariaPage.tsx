@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { DoorOpen, Shield, Users, ClipboardCheck } from "lucide-react";
+import heroPortaria from "@/assets/hero-portaria.png";
 
 const PortariaPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const PortariaPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Portaria"
       heroSubtitle="Porteiros profissionais para controle de acesso. Segurança, organização e atendimento de qualidade na entrada do seu empreendimento."
-      heroImage="https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroPortaria}
       stats={stats}
       servicesTitle="Soluções em Portaria"
       services={services}

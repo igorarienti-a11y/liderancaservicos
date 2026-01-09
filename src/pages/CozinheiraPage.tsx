@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { ChefHat, Utensils, Clock, Users } from "lucide-react";
+import heroCozinheira from "@/assets/hero-cozinheira.png";
 
 const CozinheiraPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const CozinheiraPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Cozinheira"
       heroSubtitle="Cozinheiras profissionais para refeitórios e cozinhas industriais. Refeições de qualidade para sua equipe."
-      heroImage="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroCozinheira}
       stats={stats}
       servicesTitle="Soluções para Cozinha"
       services={services}

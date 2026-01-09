@@ -1,5 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { FileText, Keyboard, ClipboardList, Archive } from "lucide-react";
+import heroDigitacao from "@/assets/hero-digitacao.png";
 
 const DigitacaoPage = () => {
   const services = [
@@ -46,7 +47,7 @@ const DigitacaoPage = () => {
       heroTitle="Serviços de"
       heroHighlight="Digitação"
       heroSubtitle="Profissionais de digitação para entrada de dados, transcrição e cadastros. Agilidade e precisão para sua operação."
-      heroImage="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1920&q=80"
+      heroImage={heroDigitacao}
       stats={stats}
       servicesTitle="Soluções em Digitação"
       services={services}

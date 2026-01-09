@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-const heroImage = "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1920&q=80";
+import heroSeguranca from "@/assets/hero-seguranca-new.png";
 import { Shield, Building2, DoorOpen, Camera } from "lucide-react";
 
 const SegurancaPage = () => {
@@ -58,7 +58,7 @@ const SegurancaPage = () => {
         title="Segurança Patrimonial"
         highlight="de Excelência"
         subtitle="Proteja seu patrimônio com quem entende. Vigilantes treinados, tecnologia de ponta e protocolos rigorosos."
-        heroImage={heroImage}
+        heroImage={heroSeguranca}
         ctaText="Quero um Orçamento"
       />
 

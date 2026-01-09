@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-const heroImage = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80";
+import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
 import { Building, Factory, HeartPulse, Home } from "lucide-react";
 
 const LimpezaPage = () => {
@@ -58,7 +58,7 @@ const LimpezaPage = () => {
         title="Serviços de"
         highlight="Limpeza Profissional"
         subtitle="Ambientes impecáveis que impressionam. Equipe especializada, produtos de qualidade e processos certificados."
-        heroImage={heroImage}
+        heroImage={heroLimpeza}
         ctaText="Quero um Orçamento"
       />
 

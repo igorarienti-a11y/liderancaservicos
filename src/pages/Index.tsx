@@ -124,7 +124,7 @@ const Index = () => {
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
-              className="h-12 md:h-16 w-auto brightness-0 invert"
+              className="h-12 md:h-16 w-auto"
             />
           </Link>
           <nav className="hidden lg:flex items-center gap-6">

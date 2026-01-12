@@ -52,7 +52,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
-              className="h-12 md:h-14 w-auto brightness-0 invert"
+              className="h-12 md:h-14 w-auto"
             />
           </div>
           

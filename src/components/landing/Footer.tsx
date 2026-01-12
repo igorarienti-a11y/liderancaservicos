@@ -13,7 +13,7 @@ const Footer = () => {
             <img
               src={logoLideranca}
               alt="Grupo Liderança"
-              className="h-10 md:h-12 w-auto brightness-0 invert mb-3 md:mb-4 mx-auto md:mx-0"
+              className="h-10 md:h-12 w-auto mb-3 md:mb-4 mx-auto md:mx-0"
             />
             <p className="text-primary-foreground/80 text-xs md:text-sm leading-relaxed">
               Há mais de 30 anos oferecendo soluções em terceirização com qualidade, 

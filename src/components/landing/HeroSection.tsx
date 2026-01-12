@@ -44,7 +44,7 @@ const HeroSection = ({
       <div className="container mx-auto px-4 relative z-10 py-8 md:py-12">
         <div className="max-w-3xl">
           <p className="text-secondary font-medium text-sm md:text-base lg:text-lg mb-2 md:mb-4">
-            O full service que dá certo
+            O full service que dá certo!
           </p>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary-foreground mb-3 md:mb-6 leading-tight">

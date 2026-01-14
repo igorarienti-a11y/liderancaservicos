@@ -137,14 +137,33 @@ async function appendToSheet(accessToken: string, spreadsheetId: string, values:
     }),
   });
 
-  const result = await response.json();
-
   if (!response.ok) {
-    console.error('Sheets API error:', result);
-    throw new Error(`Failed to append to sheet: ${result.error?.message || 'Unknown error'}`);
+    const error = await response.json();
+    throw new Error(`Failed to append to sheet: ${JSON.stringify(error)}`);
   }
+}
 
-  console.log('Successfully appended row to sheet:', result.updates);
+// Format date in ISO 8601 format with timezone offset for Brazil (UTC-3)
+function formatDateWithTimezone(): string {
+  const now = new Date();
+  
+  // Get the timezone offset for São Paulo (UTC-3)
+  const offset = -3;
+  const offsetMs = offset * 60 * 60 * 1000;
+  
+  // Adjust the date to São Paulo timezone
+  const localTime = new Date(now.getTime() + offsetMs + (now.getTimezoneOffset() * 60 * 1000));
+  
+  // Format components
+  const year = localTime.getFullYear();
+  const month = String(localTime.getMonth() + 1).padStart(2, '0');
+  const day = String(localTime.getDate()).padStart(2, '0');
+  const hours = String(localTime.getHours()).padStart(2, '0');
+  const minutes = String(localTime.getMinutes()).padStart(2, '0');
+  const seconds = String(localTime.getSeconds()).padStart(2, '0');
+  
+  // Format: 2026-01-14T20:07:20-03:00
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}-03:00`;
 }
 
 serve(async (req) => {
@@ -157,101 +176,80 @@ serve(async (req) => {
     const serviceAccountKey = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_KEY');
     const spreadsheetId = Deno.env.get('GOOGLE_SHEETS_SPREADSHEET_ID');
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!serviceAccountKey) {
-      console.error('Missing GOOGLE_SERVICE_ACCOUNT_KEY');
-      return new Response(
-        JSON.stringify({ error: 'Configuration error' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
+      throw new Error('Missing GOOGLE_SERVICE_ACCOUNT_KEY');
     }
-
     if (!spreadsheetId) {
-      console.error('Missing GOOGLE_SHEETS_SPREADSHEET_ID');
-      return new Response(
-        JSON.stringify({ error: 'Configuration error' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
+      throw new Error('Missing GOOGLE_SHEETS_SPREADSHEET_ID');
+    }
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Missing Supabase credentials');
     }
 
-    if (!supabaseUrl || !supabaseServiceKey) {
-      console.error('Missing Supabase configuration');
-      return new Response(
-        JSON.stringify({ error: 'Configuration error' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { 
-      nome, empresa, email, telefone, mensagem, serviceName, serviceType,
-      utm_source, utm_medium, utm_campaign, utm_term, utm_content 
+      nome, 
+      empresa, 
+      email, 
+      telefone, 
+      mensagem, 
+      serviceName, 
+      serviceType,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content
     } = await req.json();
 
-    // Validate required fields
-    if (!email || typeof email !== 'string') {
-      console.error('Missing or invalid email');
-      return new Response(
-        JSON.stringify({ error: 'Invalid request' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
+    console.log('Received lead data:', { nome, empresa, email, telefone, mensagem, serviceName, serviceType });
+    console.log('UTM parameters:', { utm_source, utm_medium, utm_campaign, utm_term, utm_content });
+
+    if (!email) {
+      throw new Error('Email is required');
     }
 
-    // Initialize Supabase client
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-    // Server-side validation: Verify that the lead exists in the database (created within last 5 minutes)
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-    const { data: lead, error: leadError } = await supabase
+    // Check if this lead was recently created (within last 5 minutes)
+    const { data: recentLead, error: checkError } = await supabase
       .from('leads')
-      .select('id, email, nome, empresa')
-      .eq('email', email.trim().toLowerCase())
-      .gte('created_at', fiveMinutesAgo)
+      .select('id, created_at')
+      .eq('email', email)
+      .gte('created_at', new Date(Date.now() - 5 * 60 * 1000).toISOString())
       .order('created_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
+      .limit(1);
 
-    if (leadError) {
-      console.error('Database query error:', leadError.message);
+    if (checkError) {
+      console.error('Error checking for recent lead:', checkError);
+    }
+
+    if (!recentLead || recentLead.length === 0) {
+      console.log('No recent lead found for this email, skipping sheet sync');
       return new Response(
-        JSON.stringify({ error: 'Validation failed' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ success: true, message: 'No recent lead to sync' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    if (!lead) {
-      console.error('Lead not found in database for email:', email);
-      return new Response(
-        JSON.stringify({ error: 'Unauthorized: Lead must be submitted through the form first' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    console.log('Found recent lead, syncing to sheet...');
 
-    console.log('Lead verified in database:', lead.id);
-
-    console.log('Received lead data:', { nome, empresa, email, serviceType, utm_source, utm_medium, utm_campaign });
-
-    // Format date in Brazilian format
-    const now = new Date();
-    const formattedDate = now.toLocaleString('pt-BR', { 
-      timeZone: 'America/Sao_Paulo',
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-
-    // Get access token
-    console.log('Getting Google access token...');
+    // Get access token for Google Sheets
     const accessToken = await getAccessToken(serviceAccountKey);
 
-    // Append row to sheet
-    const values = [
+    // Format date in ISO 8601 with timezone offset
+    const formattedDate = formatDateWithTimezone();
+
+    // Ensure headers exist
+    await checkAndAddHeaders(accessToken, spreadsheetId);
+
+    // Append lead data to sheet
+    await appendToSheet(accessToken, spreadsheetId, [
       formattedDate,
       nome || '',
       empresa || '',
-      email || '',
+      email,
       telefone || '',
       mensagem || '',
       serviceName || '',
@@ -261,27 +259,24 @@ serve(async (req) => {
       utm_campaign || '',
       utm_term || '',
       utm_content || ''
-    ];
+    ]);
 
-    // Check and add headers if needed
-    await checkAndAddHeaders(accessToken, spreadsheetId);
-
-    // Append row to sheet
-    console.log('Appending to sheet...');
-    await appendToSheet(accessToken, spreadsheetId, values);
+    console.log('Successfully synced lead to Google Sheets');
 
     return new Response(
       JSON.stringify({ success: true, message: 'Lead synced to Google Sheets' }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
   } catch (error: unknown) {
-    // Log detailed error server-side, return generic message to client
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Error syncing to sheets:', errorMessage);
+    console.error('Error in sync-to-sheets function:', error);
     return new Response(
-      JSON.stringify({ error: 'Failed to process request' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, error: errorMessage }),
+      { 
+        status: 500, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
     );
   }
 });

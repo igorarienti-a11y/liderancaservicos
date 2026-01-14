@@ -189,18 +189,22 @@ const Index = () => {
               <Link
                 key={service.title}
                 to={service.link}
-                className="group relative overflow-hidden rounded-2xl aspect-square shadow-lg"
+                className="group relative overflow-hidden rounded-2xl aspect-square shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
               >
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-115 group-hover:brightness-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/50 to-transparent transition-all duration-500 group-hover:from-primary/80 group-hover:via-primary/30" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-secondary/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 transition-all duration-500 group-hover:pb-8">
+                  <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center transition-all duration-300 group-hover:text-secondary group-hover:scale-105">
                     {service.title}
                   </h3>
+                  <p className="text-primary-foreground/0 text-center text-sm mt-2 transition-all duration-500 group-hover:text-primary-foreground/80">
+                    Saiba mais →
+                  </p>
                 </div>
               </Link>
             ))}

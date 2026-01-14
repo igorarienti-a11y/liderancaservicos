@@ -1,34 +1,14 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star, ChevronLeft, Grid3X3 } from "lucide-react";
+import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star } from "lucide-react";
 import logoLideranca from "@/assets/logo-lideranca.png";
 import heroBanner from "@/assets/hero-banner.png";
 import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useRef, useState } from "react";
 
-const services = [
-  { title: "Limpeza e Conservação", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
-  { title: "Segurança Patrimonial", link: "/seguranca-patrimonial", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_11@4x.jpg" },
-  { title: "Ascensorista", link: "/ascensorista", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_1@4x.jpg" },
-  { title: "Copa e Café", link: "/copa-cafe", image: "https://www.lideranca.com.br/wp-content/uploads/2025/03/Copa-e-Cafe-768x750.jpg" },
-  { title: "Cozinheira", link: "/cozinheira", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_3@4x.jpg" },
-  { title: "Digitação", link: "/digitacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_4@4x.jpg" },
-  { title: "Garçom", link: "/garcom", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_5@4x.jpg" },
-  { title: "Jardinagem", link: "/jardinagem", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_6@4x.jpg" },
-  { title: "Mão de Obra em Geral", link: "/mao-de-obra", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_8@4x.jpg" },
-  { title: "Motorista", link: "/motorista", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_9@4x.jpg" },
-  { title: "Portaria", link: "/portaria", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_10@4x.jpg" },
-  { title: "Recepção", link: "/recepcao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_14@4x.jpg" },
-  { title: "Telefonia", link: "/telefonia", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_12@4x.jpg" },
-  { title: "Zeladoria", link: "/zeladoria", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_13@4x.jpg" },
+const mainServices = [
+  { title: "Segurança", link: "/seguranca-patrimonial", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_11@4x.jpg" },
+  { title: "Limpeza", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
+  { title: "Facilities", link: "/facilities", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_8@4x.jpg" },
 ];
 
 const testimonials = [
@@ -82,11 +62,6 @@ const awards = [
 ];
 
 const Index = () => {
-  const [showAllServices, setShowAllServices] = useState(false);
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Top bar */}
@@ -197,78 +172,39 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Carousel */}
+      {/* Services Section */}
       <section id="servicos" className="relative bg-primary py-16 md:py-20 overflow-hidden">
-        {/* Solid background overlay to cover any decorative lines */}
         <div className="absolute inset-0 bg-primary z-0" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <p className="text-secondary font-semibold uppercase tracking-wide mb-2">Nossos Serviços</p>
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground">
               Soluções completas em terceirização
             </h2>
           </div>
-
-          {/* Toggle Button */}
-          <div className="flex justify-center mb-8">
-            <button
-              onClick={() => setShowAllServices(!showAllServices)}
-              className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-6 py-3 rounded-full font-medium text-sm hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
-            >
-              <Grid3X3 className="h-4 w-4" />
-              {showAllServices ? "Ver carrossel" : "Ver todos os serviços"}
-            </button>
-          </div>
           
-          {showAllServices ? (
-            /* Grid View */
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 md:gap-4">
-              {services.map((service) => (
-                <Link
-                  key={service.title}
-                  to={service.link}
-                  className="group relative overflow-hidden rounded-lg aspect-square"
-                >
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                </Link>
-              ))}
-            </div>
-          ) : (
-            /* Carousel View */
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              plugins={[autoplayPlugin.current]}
-              className="w-full max-w-6xl mx-auto"
-            >
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {services.map((service, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                    <Link
-                      to={service.link}
-                      className="group relative overflow-hidden rounded-lg aspect-square block"
-                    >
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                    </Link>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden md:flex -left-12 bg-secondary text-secondary-foreground hover:bg-secondary/90 border-none" />
-              <CarouselNext className="hidden md:flex -right-12 bg-secondary text-secondary-foreground hover:bg-secondary/90 border-none" />
-            </Carousel>
-          )}
+          {/* 3 Service Blocks */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {mainServices.map((service) => (
+              <Link
+                key={service.title}
+                to={service.link}
+                className="group relative overflow-hidden rounded-2xl aspect-square shadow-lg"
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center">
+                    {service.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
 
           {/* CTA Button */}
           <div className="text-center mt-12">

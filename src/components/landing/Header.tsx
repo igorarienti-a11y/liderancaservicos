@@ -23,6 +23,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
           <div className="flex items-center gap-6">
             <a
               href="tel:4837333100"
+              translate="no"
               className="flex items-center gap-2 hover:text-secondary transition-colors"
             >
               <Phone className="h-4 w-4" />
@@ -31,6 +32,7 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
             </a>
             <a
               href="mailto:lideranca@lideranca.com.br"
+              translate="no"
               className="hidden md:flex items-center gap-2 hover:text-secondary transition-colors"
             >
               <Mail className="h-4 w-4" />

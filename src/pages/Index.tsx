@@ -69,12 +69,12 @@ const Index = () => {
       <div className="bg-lideranca-navy-dark text-primary-foreground py-2 text-sm">
         <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-4 md:gap-6">
-            <a href="tel:4837333100" className="flex items-center gap-2 hover:text-secondary transition-colors">
+            <a href="tel:4837333100" translate="no" className="flex items-center gap-2 hover:text-secondary transition-colors">
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">(48) 3733-3100 / 3733-3101</span>
               <span className="sm:hidden text-xs">(48) 3733-3100</span>
             </a>
-            <a href="mailto:lideranca@lideranca.com.br" className="hidden md:flex items-center gap-2 hover:text-secondary transition-colors">
+            <a href="mailto:lideranca@lideranca.com.br" translate="no" className="hidden md:flex items-center gap-2 hover:text-secondary transition-colors">
               <Mail className="h-4 w-4" />
               lideranca@lideranca.com.br
             </a>
@@ -332,7 +332,7 @@ const Index = () => {
                 Com filiais e escritórios estrategicamente localizados, oferecemos atendimento de qualidade em todos os 27 estados brasileiros.
               </p>
               
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3" translate="no">
                 {["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"].map((state) => (
                   <span 
                     key={state}

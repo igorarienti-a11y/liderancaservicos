@@ -35,8 +35,8 @@ const SegurancaPage = () => {
   ];
 
   const stats = [
-    { value: "30", label: "Anos de experiência" },
-    { value: "32 mil", label: "Colaboradores" },
+    { value: "+30", label: "Anos de experiência" },
+    { value: "35 mil", label: "Colaboradores" },
     { value: "27", label: "Estados atendidos" },
     { value: "1000+", label: "Clientes satisfeitos" },
   ];

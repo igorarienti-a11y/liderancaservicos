@@ -38,6 +38,10 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
             </a>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-primary-foreground/80">
+            <a href="https://www.lideranca.com.br/lideranca/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+              Quem somos
+            </a>
+            <span>•</span>
             <span>Vagas</span>
             <span>•</span>
             <span>Portal do Colaborador</span>

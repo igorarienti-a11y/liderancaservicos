@@ -80,6 +80,9 @@ const Index = () => {
             </a>
           </div>
           <div className="flex items-center gap-4 text-xs">
+            <a href="https://www.lideranca.com.br/lideranca/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+              Quem somos
+            </a>
             <a href="https://www.lideranca.com.br/vaga/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
               Vagas
             </a>

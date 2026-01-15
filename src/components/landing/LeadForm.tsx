@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,6 +30,7 @@ interface LeadFormProps {
 
 const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const utmParams = useUTM();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -112,6 +114,9 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         telefone: "",
         mensagem: "",
       });
+
+      // Redirect to home page testimonials section
+      navigate("/#depoimentos");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};

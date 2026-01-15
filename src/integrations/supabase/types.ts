@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       leads: {
         Row: {
+          cnpj: string | null
           created_at: string
           email: string
           empresa: string
@@ -27,6 +28,7 @@ export type Database = {
           telefone: string
         }
         Insert: {
+          cnpj?: string | null
           created_at?: string
           email: string
           empresa: string
@@ -38,6 +40,7 @@ export type Database = {
           telefone: string
         }
         Update: {
+          cnpj?: string | null
           created_at?: string
           email?: string
           empresa?: string

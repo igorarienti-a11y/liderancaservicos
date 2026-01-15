@@ -87,12 +87,12 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 
 async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
   const headers = [
-    'Data', 'Nome', 'Empresa', 'Email', 'Telefone', 'Mensagem', 
+    'Data', 'Nome', 'Empresa', 'CNPJ', 'Email', 'Telefone', 'Mensagem', 
     'Serviço', 'Tipo', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Term', 'UTM Content'
   ];
 
   // Check if first row exists
-  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:M1`;
+  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:N1`;
   const checkResponse = await fetch(checkUrl, {
     headers: { 'Authorization': `Bearer ${accessToken}` },
   });
@@ -102,7 +102,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
   // If no values or first cell is empty, add headers
   if (!checkResult.values || checkResult.values.length === 0 || !checkResult.values[0][0]) {
     console.log('Adding headers to sheet...');
-    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:M1?valueInputOption=USER_ENTERED`;
+    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:N1?valueInputOption=USER_ENTERED`;
     
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
@@ -123,7 +123,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
 }
 
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
-  const range = 'A:M'; // Columns A to M (added UTM columns)
+  const range = 'A:N'; // Columns A to N (added CNPJ column)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const response = await fetch(url, {
@@ -193,6 +193,7 @@ serve(async (req) => {
     const { 
       nome, 
       empresa, 
+      cnpj,
       email, 
       telefone, 
       mensagem, 
@@ -205,7 +206,7 @@ serve(async (req) => {
       utm_content
     } = await req.json();
 
-    console.log('Received lead data:', { nome, empresa, email, telefone, mensagem, serviceName, serviceType });
+    console.log('Received lead data:', { nome, empresa, cnpj, email, telefone, mensagem, serviceName, serviceType });
     console.log('UTM parameters:', { utm_source, utm_medium, utm_campaign, utm_term, utm_content });
 
     if (!email) {
@@ -249,6 +250,7 @@ serve(async (req) => {
       formattedDate,
       nome || '',
       empresa || '',
+      cnpj || '',
       email,
       telefone || '',
       mensagem || '',

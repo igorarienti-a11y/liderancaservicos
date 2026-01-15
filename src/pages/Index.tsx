@@ -158,7 +158,7 @@ const Index = () => {
             </div>
             <div className="text-center">
               <Users className="h-6 w-6 text-secondary mx-auto mb-2" />
-              <p className="text-2xl md:text-3xl font-bold text-secondary">+32 mil</p>
+              <p className="text-2xl md:text-3xl font-bold text-secondary">+35 mil</p>
               <p className="text-primary-foreground/80 text-sm">Colaboradores</p>
             </div>
             <div className="text-center">
@@ -168,7 +168,7 @@ const Index = () => {
             </div>
             <div className="text-center">
               <Award className="h-6 w-6 text-secondary mx-auto mb-2" />
-              <p className="text-2xl md:text-3xl font-bold text-secondary">30+</p>
+              <p className="text-2xl md:text-3xl font-bold text-secondary">+30</p>
               <p className="text-primary-foreground/80 text-sm">Anos de experiência</p>
             </div>
           </div>
@@ -285,13 +285,13 @@ const Index = () => {
                 Conheça a Liderança
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                30 anos de excelência em terceirização
+                +30 anos de excelência em terceirização
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Atuamos desde 1995 no competitivo segmento da terceirização. São 30 anos em busca de inovação e aprimoramento das nossas entregas, que transformaram a marca Liderança em referência de excelência no setor.
+                Atuamos desde 1995 no competitivo segmento da terceirização. São mais de 30 anos em busca de inovação e aprimoramento das nossas entregas, que transformaram a marca Liderança em referência de excelência no setor.
               </p>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                Com mais de 32 mil colaboradores e presença em 27 estados, oferecemos soluções completas em mão de obra terceirizada para empresas de todos os portes e segmentos.
+                Com mais de 35 mil colaboradores e presença em 27 estados, oferecemos soluções completas em mão de obra terceirizada para empresas de todos os portes e segmentos.
               </p>
             </div>
             <div className="flex-1">

@@ -16,6 +16,7 @@ declare global {
 const leadSchema = z.object({
   nome: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
   empresa: z.string().trim().min(2, "Nome da empresa deve ter pelo menos 2 caracteres").max(100, "Nome da empresa muito longo"),
+  cnpj: z.string().trim().max(18, "CNPJ muito longo").optional().or(z.literal("")),
   email: z.string().trim().email("E-mail inválido").max(255, "E-mail muito longo"),
   telefone: z.string().trim().min(10, "Telefone deve ter pelo menos 10 dígitos").max(20, "Telefone muito longo"),
   mensagem: z.string().trim().max(1000, "Mensagem muito longa").optional(),
@@ -33,6 +34,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const [formData, setFormData] = useState({
     nome: "",
     empresa: "",
+    cnpj: "",
     email: "",
     telefone: "",
     mensagem: "",
@@ -59,6 +61,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       const { error } = await supabase.from("leads").insert({
         nome: validatedData.nome,
         empresa: validatedData.empresa,
+        cnpj: validatedData.cnpj || null,
         email: validatedData.email,
         telefone: validatedData.telefone,
         mensagem: validatedData.mensagem || null,
@@ -75,6 +78,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         body: {
           nome: validatedData.nome,
           empresa: validatedData.empresa,
+          cnpj: validatedData.cnpj || '',
           email: validatedData.email,
           telefone: validatedData.telefone,
           mensagem: validatedData.mensagem || '',
@@ -103,6 +107,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       setFormData({
         nome: "",
         empresa: "",
+        cnpj: "",
         email: "",
         telefone: "",
         mensagem: "",
@@ -175,6 +180,21 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                     className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
                   />
                   {errors.empresa && <p className="text-secondary text-sm">{errors.empresa}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="cnpj" className="text-primary-foreground font-medium">
+                    CNPJ (opcional)
+                  </label>
+                  <Input
+                    id="cnpj"
+                    name="cnpj"
+                    value={formData.cnpj}
+                    onChange={handleChange}
+                    placeholder="00.000.000/0000-00"
+                    className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
+                  />
+                  {errors.cnpj && <p className="text-secondary text-sm">{errors.cnpj}</p>}
                 </div>
 
                 <div className="space-y-2">

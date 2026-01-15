@@ -52,13 +52,13 @@ const Header = ({ ctaText = "Solicitar Orçamento", onCtaClick }: HeaderProps) =
       {/* Main header */}
       <header className="bg-primary py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center">
+          <a href="https://www.lideranca.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center">
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
               className="h-12 md:h-14 w-auto"
             />
-          </div>
+          </a>
           
           <button
             onClick={scrollToForm}

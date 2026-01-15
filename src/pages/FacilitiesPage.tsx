@@ -51,7 +51,7 @@ const FacilitiesPage = () => {
       <HeroSection
         title="Gestão Completa de"
         highlight="Facilities"
-        subtitle="Terceirize a gestão do seu empreendimento com quem tem mais de 30 anos de experiência. Foque no seu negócio enquanto cuidamos de tudo."
+        subtitle="Chega de preocupações com facilities! Confie a gestão da sua empresa ou condomínio com quem tem 31 anos de experiência. Terceirize agora!"
         heroImage={heroFacilities}
         ctaText="Quero um Orçamento"
       />

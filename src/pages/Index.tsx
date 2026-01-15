@@ -99,16 +99,15 @@ const Index = () => {
       {/* Header */}
       <header className="bg-primary py-4">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <Link to="/">
+          <a href="https://www.lideranca.com.br" target="_blank" rel="noopener noreferrer">
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
               className="h-12 md:h-16 w-auto"
             />
-          </Link>
+          </a>
           <nav className="hidden lg:flex items-center gap-6">
             <Link to="/" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Início</Link>
-            <Link to="/facilities" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Liderança</Link>
             <a href="#servicos" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Nossos Serviços</a>
             <a href="#depoimentos" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Depoimentos</a>
             <a href="#contato" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Contato</a>

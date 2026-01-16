@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useUTM } from "@/hooks/use-utm";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,6 +21,7 @@ const leadSchema = z.object({
   cnpj: z.string().trim().max(18, "CNPJ muito longo").optional().or(z.literal("")),
   email: z.string().trim().email("E-mail inválido").max(255, "E-mail muito longo"),
   telefone: z.string().trim().min(10, "Telefone deve ter pelo menos 10 dígitos").max(20, "Telefone muito longo"),
+  numeroColaboradores: z.string().min(1, "Selecione o número de colaboradores"),
   mensagem: z.string().trim().max(1000, "Mensagem muito longa").optional(),
 });
 
@@ -39,6 +41,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     cnpj: "",
     email: "",
     telefone: "",
+    numeroColaboradores: "",
     mensagem: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -86,6 +89,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
           mensagem: validatedData.mensagem || '',
           serviceName,
           serviceType,
+          numeroColaboradores: validatedData.numeroColaboradores,
           ...utmParams,
         }
       }).catch((err) => {
@@ -112,6 +116,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         cnpj: "",
         email: "",
         telefone: "",
+        numeroColaboradores: "",
         mensagem: "",
       });
 
@@ -231,6 +236,32 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                     className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
                   />
                   {errors.telefone && <p className="text-secondary text-sm">{errors.telefone}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="numeroColaboradores" className="text-primary-foreground font-medium">
+                    Número de Colaboradores *
+                  </label>
+                  <Select
+                    value={formData.numeroColaboradores}
+                    onValueChange={(value) => {
+                      setFormData((prev) => ({ ...prev, numeroColaboradores: value }));
+                      if (errors.numeroColaboradores) {
+                        setErrors((prev) => ({ ...prev, numeroColaboradores: "" }));
+                      }
+                    }}
+                  >
+                    <SelectTrigger className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground h-12">
+                      <SelectValue placeholder="Selecione uma opção" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1-3">1-3</SelectItem>
+                      <SelectItem value="4-6">4-6</SelectItem>
+                      <SelectItem value="7-9">7-9</SelectItem>
+                      <SelectItem value="9+">9+</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {errors.numeroColaboradores && <p className="text-secondary text-sm">{errors.numeroColaboradores}</p>}
                 </div>
               </div>
 

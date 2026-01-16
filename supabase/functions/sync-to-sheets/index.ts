@@ -88,11 +88,11 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
   const headers = [
     'Data', 'Nome', 'Empresa', 'CNPJ', 'Email', 'Telefone', 'Mensagem', 
-    'Serviço', 'Tipo', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Term', 'UTM Content'
+    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'
   ];
 
   // Check if first row exists
-  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:N1`;
+  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:O1`;
   const checkResponse = await fetch(checkUrl, {
     headers: { 'Authorization': `Bearer ${accessToken}` },
   });
@@ -102,7 +102,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
   // If no values or first cell is empty, add headers
   if (!checkResult.values || checkResult.values.length === 0 || !checkResult.values[0][0]) {
     console.log('Adding headers to sheet...');
-    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:N1?valueInputOption=USER_ENTERED`;
+    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:O1?valueInputOption=USER_ENTERED`;
     
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
@@ -123,7 +123,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
 }
 
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
-  const range = 'A:N'; // Columns A to N (added CNPJ column)
+  const range = 'A:O'; // Columns A to O (15 columns including Colaboradores)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const response = await fetch(url, {
@@ -199,6 +199,7 @@ serve(async (req) => {
       mensagem, 
       serviceName, 
       serviceType,
+      numeroColaboradores,
       utm_source,
       utm_medium,
       utm_campaign,
@@ -206,7 +207,7 @@ serve(async (req) => {
       utm_content
     } = await req.json();
 
-    console.log('Received lead data:', { nome, empresa, cnpj, email, telefone, mensagem, serviceName, serviceType });
+    console.log('Received lead data:', { nome, empresa, cnpj, email, telefone, mensagem, serviceName, serviceType, numeroColaboradores });
     console.log('UTM parameters:', { utm_source, utm_medium, utm_campaign, utm_term, utm_content });
 
     if (!email) {
@@ -245,7 +246,7 @@ serve(async (req) => {
     // Ensure headers exist
     await checkAndAddHeaders(accessToken, spreadsheetId);
 
-    // Append lead data to sheet
+    // Append lead data to sheet in exact order: Data, Nome, Empresa, CNPJ, Email, Telefone, Mensagem, Serviço, Tipo, Colaboradores, utm_source, utm_medium, utm_campaign, utm_term, utm_content
     await appendToSheet(accessToken, spreadsheetId, [
       formattedDate,
       nome || '',
@@ -256,6 +257,7 @@ serve(async (req) => {
       mensagem || '',
       serviceName || '',
       serviceType || '',
+      numeroColaboradores || '',
       utm_source || '',
       utm_medium || '',
       utm_campaign || '',

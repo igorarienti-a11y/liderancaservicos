@@ -48,7 +48,7 @@ const LimpezaIndustriaPage = () => {
       heroHighlight="Conservação Industrial"
       heroSubtitle="Sabemos que na sua indústria, cada minuto conta. Por isso, cuidamos da limpeza enquanto você foca no que realmente importa: a produção. Ambientes limpos, equipe preparada e zero interrupções."
       heroImage={heroLimpezaConservacao}
-      mobileImagePosition="100%"
+      mobileImagePosition="70%"
       stats={stats}
       servicesTitle="Soluções em Limpeza"
       services={services}

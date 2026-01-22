@@ -14,6 +14,7 @@ import SindicoPage from "./pages/SindicoPage";
 import TelefoniaPage from "./pages/TelefoniaPage";
 import ZeladoriaPage from "./pages/ZeladoriaPage";
 import LimpezaConservacaoPage from "./pages/LimpezaConservacaoPage";
+import LimpezaIndustriaPage from "./pages/LimpezaIndustriaPage";
 import SegurancaPatrimonialPage from "./pages/SegurancaPatrimonialPage";
 import AscensoristaPage from "./pages/AscensoristaPage";
 import GarcomPage from "./pages/GarcomPage";
@@ -88,6 +89,7 @@ const App = () => {
           <Route path="/telefonia" element={<TelefoniaPage />} />
           <Route path="/zeladoria" element={<ZeladoriaPage />} />
           <Route path="/limpeza-conservacao" element={<LimpezaConservacaoPage />} />
+          <Route path="/limpeza-industria" element={<LimpezaIndustriaPage />} />
           <Route path="/seguranca-patrimonial" element={<SegurancaPatrimonialPage />} />
           <Route path="/ascensorista" element={<AscensoristaPage />} />
           <Route path="/garcom" element={<GarcomPage />} />

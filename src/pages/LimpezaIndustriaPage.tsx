@@ -45,7 +45,7 @@ const LimpezaIndustriaPage = () => {
   return (
     <ServicePageTemplate
       heroTitle="Limpeza e"
-      heroHighlight="Conservação"
+      heroHighlight="Conservação Industrial"
       heroSubtitle="Sabemos que na sua indústria, cada minuto conta. Por isso, cuidamos da limpeza enquanto você foca no que realmente importa: a produção. Ambientes limpos, equipe preparada e zero interrupções."
       heroImage={heroLimpezaConservacao}
       mobileImagePosition="100%"

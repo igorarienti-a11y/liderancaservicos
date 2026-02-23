@@ -27,6 +27,7 @@ import MotoristaPage from "./pages/MotoristaPage";
 import PortariaPage from "./pages/PortariaPage";
 import RecepcaoPage from "./pages/RecepcaoPage";
 import NotFound from "./pages/NotFound";
+import ThankYouPage from "./pages/ThankYouPage";
 
 // Import hero images for preloading
 import heroBanner from "@/assets/hero-banner.png";
@@ -101,6 +102,7 @@ const App = () => {
           <Route path="/motorista" element={<MotoristaPage />} />
           <Route path="/portaria" element={<PortariaPage />} />
           <Route path="/recepcao" element={<RecepcaoPage />} />
+          <Route path="/tkyp" element={<ThankYouPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

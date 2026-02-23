@@ -120,8 +120,8 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         mensagem: "",
       });
 
-      // Redirect to home page testimonials section
-      navigate("/#depoimentos");
+      // Redirect to thank you page
+      navigate("/tkyp");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};

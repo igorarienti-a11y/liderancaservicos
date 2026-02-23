@@ -85,13 +85,6 @@ const ThankYouPage = () => {
             </a>
           </div>
 
-          {/* CTA voltar */}
-          <Link to="/">
-            <Button variant="cta" size="lg">
-              Conheça nossos serviços
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </Link>
         </div>
       </main>
 

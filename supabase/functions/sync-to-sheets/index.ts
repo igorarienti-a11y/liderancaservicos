@@ -266,7 +266,7 @@ serve(async (req) => {
       utm_term || '',
       '', // Status (preenchido manualmente)
       '', // Vendas (preenchido manualmente)
-      brazilDate.iso
+      ''  // Data ISO (preenchido por Apps Script)
     ]);
 
     console.log('Successfully synced lead to Google Sheets');

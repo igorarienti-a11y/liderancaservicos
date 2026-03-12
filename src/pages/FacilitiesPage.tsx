@@ -26,8 +26,8 @@ const FacilitiesPage = () => {
     { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
     { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Atendimento e serviço de mesa" },
     { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
-    { title: "Limpeza", link: "/limpeza", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa" },
-    { title: "Segurança", link: "/seguranca", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial" },
+    { title: "Limpeza", link: "https://liderancafacilities.com.br/limpeza-conservacao", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa", external: true },
+    { title: "Segurança", link: "https://liderancafacilities.com.br/seguranca-patrimonial", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial", external: true },
     
   ];
 
@@ -71,25 +71,34 @@ const FacilitiesPage = () => {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto">
-            {allServices.map((service, index) => (
-              <Link
-                key={index}
-                to={service.link}
-                className="bg-muted rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
-              >
-                <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
-                  <div className="scale-75 md:scale-100">
-                    {service.icon}
+            {allServices.map((service, index) => {
+              const cardContent = (
+                <>
+                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
+                    <div className="scale-75 md:scale-100">
+                      {service.icon}
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-sm md:text-lg font-bold text-primary mb-1 md:mb-2 leading-tight group-hover:text-primary/80 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-xs md:text-sm hidden sm:block">
-                  {service.description}
-                </p>
-              </Link>
-            ))}
+                  <h3 className="text-sm md:text-lg font-bold text-primary mb-1 md:mb-2 leading-tight group-hover:text-primary/80 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground text-xs md:text-sm hidden sm:block">
+                    {service.description}
+                  </p>
+                </>
+              );
+              const className = "bg-muted rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group";
+              
+              return service.external ? (
+                <a key={index} href={service.link} target="_blank" rel="noopener noreferrer" className={className}>
+                  {cardContent}
+                </a>
+              ) : (
+                <Link key={index} to={service.link} className={className}>
+                  {cardContent}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

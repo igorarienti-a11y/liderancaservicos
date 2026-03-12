@@ -10,7 +10,8 @@ import MobileCTAButton from "@/components/landing/MobileCTAButton";
 import heroFacilities from "@/assets/hero-facilities-new.png";
 import { 
   Users, Building2, Coffee, Phone, DoorOpen, 
-  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell
+  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell,
+  Sparkles, Shield
 } from "lucide-react";
 
 const FacilitiesPage = () => {
@@ -23,8 +24,10 @@ const FacilitiesPage = () => {
     { title: "Jardinagem", link: "/jardinagem", icon: <Flower2 className="h-7 w-7 text-primary" />, description: "Paisagismo e manutenção" },
     { title: "Motorista", link: "/motorista", icon: <Car className="h-7 w-7 text-primary" />, description: "Transporte executivo" },
     { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
-    { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Serviços de buffet" },
+    { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Atendimento e serviço de mesa" },
     { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
+    { title: "Limpeza", link: "/limpeza", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa" },
+    { title: "Segurança", link: "/seguranca", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial" },
     
   ];
 

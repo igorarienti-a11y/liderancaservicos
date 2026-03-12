@@ -10,7 +10,8 @@ import MobileCTAButton from "@/components/landing/MobileCTAButton";
 import heroFacilities from "@/assets/hero-facilities-new.png";
 import { 
   Users, Building2, Coffee, Phone, DoorOpen, 
-  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell
+  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell,
+  Sparkles, Shield
 } from "lucide-react";
 
 const FacilitiesPage = () => {

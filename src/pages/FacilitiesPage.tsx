@@ -25,7 +25,7 @@ const FacilitiesPage = () => {
     { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
     { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Serviços de buffet" },
     { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
-    { title: "Síndico", link: "/sindico", icon: <Building2 className="h-7 w-7 text-primary" />, description: "Gestão condominial" },
+    
   ];
 
   const stats = [

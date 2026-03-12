@@ -26,8 +26,8 @@ const FacilitiesPage = () => {
     { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
     { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Atendimento e serviço de mesa" },
     { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
-    { title: "Limpeza", link: "/limpeza", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa" },
-    { title: "Segurança", link: "/seguranca", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial" },
+    { title: "Limpeza", link: "https://liderancafacilities.com.br/limpeza-conservacao", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa", external: true },
+    { title: "Segurança", link: "https://liderancafacilities.com.br/seguranca-patrimonial", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial", external: true },
     
   ];
 

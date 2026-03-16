@@ -211,21 +211,41 @@ const Index = () => {
             </h2>
           </div>
           
-          {/* 3 Service Blocks */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {mainServices.map((service) => (
-              <Link
-                key={service.title}
-                to={service.link}
-                className="group relative overflow-hidden rounded-2xl aspect-square transition-all duration-500 hover:-translate-y-2"
-              >
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                />
-              </Link>
-            ))}
+          {/* Service Cards Carousel */}
+          <div className="max-w-6xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                  stopOnInteraction: false,
+                  stopOnMouseEnter: true,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {serviceCards.map((service) => (
+                  <CarouselItem key={service.title} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <Link
+                      to={service.link}
+                      className="group block overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2"
+                    >
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105"
+                      />
+                    </Link>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-4 bg-secondary text-secondary-foreground border-none hover:bg-secondary/80" />
+              <CarouselNext className="hidden md:flex -right-4 bg-secondary text-secondary-foreground border-none hover:bg-secondary/80" />
+            </Carousel>
           </div>
 
           {/* CTA Button */}

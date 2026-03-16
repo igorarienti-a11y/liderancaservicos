@@ -8,27 +8,30 @@ import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
 import heroFacilities from "@/assets/hero-facilities-new.png";
-import { 
-  Users, Building2, Coffee, Phone, DoorOpen, 
-  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell,
-  Sparkles, Shield
-} from "lucide-react";
+
+import cardPortaria from "@/assets/card-portaria.png";
+import cardRecepcao from "@/assets/card-recepcao.png";
+import cardCopeira from "@/assets/card-copeira.png";
+import cardCozinheira from "@/assets/card-cozinheira.png";
+import cardGarcom from "@/assets/card-garcom.png";
+import cardJardinagem from "@/assets/card-jardinagem.png";
+import cardMotorista from "@/assets/card-motorista.png";
+import cardMaoDeObra from "@/assets/card-mao-de-obra.png";
+import cardLimpeza from "@/assets/card-limpeza.png";
+import iconSeguranca from "@/assets/icon-seguranca.png";
 
 const FacilitiesPage = () => {
   const allServices = [
-    { title: "Portaria", link: "/portaria", icon: <DoorOpen className="h-7 w-7 text-primary" />, description: "Controle de acesso profissional" },
-    { title: "Recepção", link: "/recepcao", icon: <ConciergeBell className="h-7 w-7 text-primary" />, description: "Atendimento de excelência" },
-    { title: "Zeladoria", link: "/zeladoria", icon: <Building2 className="h-7 w-7 text-primary" />, description: "Cuidado integral do patrimônio" },
-    { title: "Copa e Café", link: "/copa-cafe", icon: <Coffee className="h-7 w-7 text-primary" />, description: "Serviços com qualidade" },
-    { title: "Telefonia", link: "/telefonia", icon: <Phone className="h-7 w-7 text-primary" />, description: "Atendimento telefônico" },
-    { title: "Jardinagem", link: "/jardinagem", icon: <Flower2 className="h-7 w-7 text-primary" />, description: "Paisagismo e manutenção" },
-    { title: "Motorista", link: "/motorista", icon: <Car className="h-7 w-7 text-primary" />, description: "Transporte executivo" },
-    { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
-    { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Atendimento e serviço de mesa" },
-    { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
-    { title: "Limpeza", link: "https://liderancafacilities.com.br/limpeza-conservacao", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa", external: true },
-    { title: "Segurança", link: "https://liderancafacilities.com.br/seguranca-patrimonial", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial", external: true },
-    
+    { title: "Portaria", link: "/portaria", image: cardPortaria },
+    { title: "Recepção", link: "/recepcao", image: cardRecepcao },
+    { title: "Segurança", link: "/seguranca-patrimonial", image: iconSeguranca },
+    { title: "Limpeza", link: "/limpeza-conservacao", image: cardLimpeza },
+    { title: "Copa e Café", link: "/copa-cafe", image: cardCopeira },
+    { title: "Cozinheira", link: "/cozinheira", image: cardCozinheira },
+    { title: "Garçom", link: "/garcom", image: cardGarcom },
+    { title: "Jardinagem", link: "/jardinagem", image: cardJardinagem },
+    { title: "Motorista", link: "/motorista", image: cardMotorista },
+    { title: "Mão de Obra", link: "/mao-de-obra", image: cardMaoDeObra },
   ];
 
   const stats = [
@@ -71,34 +74,19 @@ const FacilitiesPage = () => {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto">
-            {allServices.map((service, index) => {
-              const cardContent = (
-                <>
-                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
-                    <div className="scale-75 md:scale-100">
-                      {service.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-sm md:text-lg font-bold text-primary mb-1 md:mb-2 leading-tight group-hover:text-primary/80 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground text-xs md:text-sm hidden sm:block">
-                    {service.description}
-                  </p>
-                </>
-              );
-              const className = "bg-muted rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group";
-              
-              return service.external ? (
-                <a key={index} href={service.link} target="_blank" rel="noopener noreferrer" className={className}>
-                  {cardContent}
-                </a>
-              ) : (
-                <Link key={index} to={service.link} className={className}>
-                  {cardContent}
-                </Link>
-              );
-            })}
+            {allServices.map((service, index) => (
+              <Link
+                key={index}
+                to={service.link}
+                className="group block overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2"
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105"
+                />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -8,7 +8,7 @@ import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
 
 const mainServices = [
-  { title: "Segurança", link: "/seguranca-patrimonial", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_11@4x.jpg" },
+  { title: "Segurança", link: "/seguranca-patrimonial", image: iconSeguranca },
   { title: "Limpeza", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
   { title: "Facilities", link: "/facilities", image: serviceFacilities },
 ];

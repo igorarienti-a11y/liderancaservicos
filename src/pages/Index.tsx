@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star } from
 import logoLideranca from "@/assets/logo-lideranca.png";
 import heroBanner from "@/assets/hero-banner.png";
 import serviceFacilities from "@/assets/service-facilities.png";
+import iconSeguranca from "@/assets/icon-seguranca.png";
 import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
 

@@ -2,15 +2,39 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star } from "lucide-react";
 import logoLideranca from "@/assets/logo-lideranca.png";
 import heroBanner from "@/assets/hero-banner.png";
-import serviceFacilities from "@/assets/service-facilities.png";
-import iconSeguranca from "@/assets/icon-seguranca.png";
 import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
-const mainServices = [
+import iconSeguranca from "@/assets/icon-seguranca.png";
+import cardPortaria from "@/assets/card-portaria.png";
+import cardRecepcao from "@/assets/card-recepcao.png";
+import cardCopeira from "@/assets/card-copeira.png";
+import cardCozinheira from "@/assets/card-cozinheira.png";
+import cardGarcom from "@/assets/card-garcom.png";
+import cardJardinagem from "@/assets/card-jardinagem.png";
+import cardMotorista from "@/assets/card-motorista.png";
+import cardMaoDeObra from "@/assets/card-mao-de-obra.png";
+import cardLimpeza from "@/assets/card-limpeza.png";
+
+const serviceCards = [
+  { title: "Portaria", link: "/portaria", image: cardPortaria },
+  { title: "Recepção", link: "/recepcao", image: cardRecepcao },
   { title: "Segurança", link: "/seguranca-patrimonial", image: iconSeguranca },
-  { title: "Limpeza", link: "/limpeza-conservacao", image: "https://www.lideranca.com.br/wp-content/uploads/2024/11/Prancheta-1_7@4x.jpg" },
-  { title: "Facilities", link: "/facilities", image: serviceFacilities },
+  { title: "Limpeza", link: "/limpeza-conservacao", image: cardLimpeza },
+  { title: "Copa e Café", link: "/copa-cafe", image: cardCopeira },
+  { title: "Cozinheira", link: "/cozinheira", image: cardCozinheira },
+  { title: "Garçom", link: "/garcom", image: cardGarcom },
+  { title: "Jardinagem", link: "/jardinagem", image: cardJardinagem },
+  { title: "Motorista", link: "/motorista", image: cardMotorista },
+  { title: "Mão de Obra", link: "/mao-de-obra", image: cardMaoDeObra },
 ];
 
 const testimonials = [

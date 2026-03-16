@@ -19,6 +19,7 @@ import cardMotorista from "@/assets/card-motorista.png";
 import cardMaoDeObra from "@/assets/card-mao-de-obra.png";
 import cardLimpeza from "@/assets/card-limpeza.png";
 import iconSeguranca from "@/assets/icon-seguranca.png";
+import cardZeladoria from "@/assets/card-zeladoria.png";
 
 const FacilitiesPage = () => {
   const allServices = [
@@ -26,6 +27,7 @@ const FacilitiesPage = () => {
     { title: "Recepção", link: "/recepcao", image: cardRecepcao },
     { title: "Segurança", link: "/seguranca-patrimonial", image: iconSeguranca },
     { title: "Limpeza", link: "/limpeza-conservacao", image: cardLimpeza },
+    { title: "Zeladoria", link: "/zeladoria", image: cardZeladoria },
     { title: "Copa e Café", link: "/copa-cafe", image: cardCopeira },
     { title: "Cozinheira", link: "/cozinheira", image: cardCozinheira },
     { title: "Garçom", link: "/garcom", image: cardGarcom },

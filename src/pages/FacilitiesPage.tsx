@@ -8,27 +8,30 @@ import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
 import heroFacilities from "@/assets/hero-facilities-new.png";
-import { 
-  Users, Building2, Coffee, Phone, DoorOpen, 
-  Flower2, Car, UtensilsCrossed, UserCheck, ConciergeBell,
-  Sparkles, Shield
-} from "lucide-react";
+
+import cardPortaria from "@/assets/card-portaria.png";
+import cardRecepcao from "@/assets/card-recepcao.png";
+import cardCopeira from "@/assets/card-copeira.png";
+import cardCozinheira from "@/assets/card-cozinheira.png";
+import cardGarcom from "@/assets/card-garcom.png";
+import cardJardinagem from "@/assets/card-jardinagem.png";
+import cardMotorista from "@/assets/card-motorista.png";
+import cardMaoDeObra from "@/assets/card-mao-de-obra.png";
+import cardLimpeza from "@/assets/card-limpeza.png";
+import iconSeguranca from "@/assets/icon-seguranca.png";
 
 const FacilitiesPage = () => {
   const allServices = [
-    { title: "Portaria", link: "/portaria", icon: <DoorOpen className="h-7 w-7 text-primary" />, description: "Controle de acesso profissional" },
-    { title: "Recepção", link: "/recepcao", icon: <ConciergeBell className="h-7 w-7 text-primary" />, description: "Atendimento de excelência" },
-    { title: "Zeladoria", link: "/zeladoria", icon: <Building2 className="h-7 w-7 text-primary" />, description: "Cuidado integral do patrimônio" },
-    { title: "Copa e Café", link: "/copa-cafe", icon: <Coffee className="h-7 w-7 text-primary" />, description: "Serviços com qualidade" },
-    { title: "Telefonia", link: "/telefonia", icon: <Phone className="h-7 w-7 text-primary" />, description: "Atendimento telefônico" },
-    { title: "Jardinagem", link: "/jardinagem", icon: <Flower2 className="h-7 w-7 text-primary" />, description: "Paisagismo e manutenção" },
-    { title: "Motorista", link: "/motorista", icon: <Car className="h-7 w-7 text-primary" />, description: "Transporte executivo" },
-    { title: "Cozinheira", link: "/cozinheira", icon: <UtensilsCrossed className="h-7 w-7 text-primary" />, description: "Alimentação corporativa" },
-    { title: "Garçom", link: "/garcom", icon: <UserCheck className="h-7 w-7 text-primary" />, description: "Atendimento e serviço de mesa" },
-    { title: "Mão de Obra", link: "/mao-de-obra", icon: <Users className="h-7 w-7 text-primary" />, description: "Profissionais especializados" },
-    { title: "Limpeza", link: "https://liderancafacilities.com.br/limpeza-conservacao", icon: <Sparkles className="h-7 w-7 text-primary" />, description: "Limpeza profissional completa", external: true },
-    { title: "Segurança", link: "https://liderancafacilities.com.br/seguranca-patrimonial", icon: <Shield className="h-7 w-7 text-primary" />, description: "Vigilância e proteção patrimonial", external: true },
-    
+    { title: "Portaria", link: "/portaria", image: cardPortaria },
+    { title: "Recepção", link: "/recepcao", image: cardRecepcao },
+    { title: "Segurança", link: "/seguranca-patrimonial", image: iconSeguranca },
+    { title: "Limpeza", link: "/limpeza-conservacao", image: cardLimpeza },
+    { title: "Copa e Café", link: "/copa-cafe", image: cardCopeira },
+    { title: "Cozinheira", link: "/cozinheira", image: cardCozinheira },
+    { title: "Garçom", link: "/garcom", image: cardGarcom },
+    { title: "Jardinagem", link: "/jardinagem", image: cardJardinagem },
+    { title: "Motorista", link: "/motorista", image: cardMotorista },
+    { title: "Mão de Obra", link: "/mao-de-obra", image: cardMaoDeObra },
   ];
 
   const stats = [

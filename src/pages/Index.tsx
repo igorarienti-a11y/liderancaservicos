@@ -252,7 +252,7 @@ const Index = () => {
           <div className="text-center mt-12">
             <Link to="/facilities">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold text-lg px-10 py-6 shadow-button">
-                Solicite um Orçamento
+                Ver todos os serviços
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

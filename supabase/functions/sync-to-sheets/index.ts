@@ -88,7 +88,7 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
   const headers = [
     'Mês', 'Data', 'Nome', 'Empresa', 'CNPJ', 'Email', 'Telefone', 'Mensagem', 
-    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO', 'gclid'
+    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO', '', '', 'gclid'
   ];
 
   // Check if first row exists

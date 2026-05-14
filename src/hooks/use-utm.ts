@@ -6,6 +6,7 @@ export interface UTMParams {
   utm_campaign: string;
   utm_term: string;
   utm_content: string;
+  gclid: string;
 }
 
 const UTM_STORAGE_KEY = "utm_params";
@@ -17,6 +18,7 @@ export function useUTM(): UTMParams {
     utm_campaign: "",
     utm_term: "",
     utm_content: "",
+    gclid: "",
   });
 
   useEffect(() => {
@@ -28,6 +30,7 @@ export function useUTM(): UTMParams {
       utm_campaign: urlParams.get("utm_campaign") || "",
       utm_term: urlParams.get("utm_term") || "",
       utm_content: urlParams.get("utm_content") || "",
+      gclid: urlParams.get("gclid") || "",
     };
 
     // Check if any UTM param exists in URL

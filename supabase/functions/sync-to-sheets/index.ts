@@ -88,11 +88,11 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
   const headers = [
     'Mês', 'Data', 'Nome', 'Empresa', 'CNPJ', 'Email', 'Telefone', 'Mensagem', 
-    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO'
+    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO', 'gclid'
   ];
 
   // Check if first row exists
-  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:R1`;
+  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:S1`;
   const checkResponse = await fetch(checkUrl, {
     headers: { 'Authorization': `Bearer ${accessToken}` },
   });
@@ -102,7 +102,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
   // If no values or first cell is empty, add headers
   if (!checkResult.values || checkResult.values.length === 0 || !checkResult.values[0][0]) {
     console.log('Adding headers to sheet...');
-    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:R1?valueInputOption=USER_ENTERED`;
+    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:S1?valueInputOption=USER_ENTERED`;
     
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
@@ -123,7 +123,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
 }
 
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
-  const range = 'A:R'; // Columns A to R (18 columns)
+  const range = 'A:S'; // Columns A to S (19 columns)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const response = await fetch(url, {
@@ -205,11 +205,12 @@ serve(async (req) => {
       utm_medium,
       utm_campaign,
       utm_term,
-      utm_content
+      utm_content,
+      gclid
     } = await req.json();
 
     console.log('Received lead data:', { nome, empresa, cnpj, email, telefone, mensagem, serviceName, serviceType, numeroColaboradores });
-    console.log('UTM parameters:', { utm_source, utm_medium, utm_campaign, utm_term, utm_content });
+    console.log('UTM parameters:', { utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid });
 
     if (!email) {
       throw new Error('Email is required');
@@ -266,7 +267,8 @@ serve(async (req) => {
       utm_term || '',
       '', // Status (preenchido manualmente)
       '', // Vendas (preenchido manualmente)
-      ''  // Data ISO (preenchido por Apps Script)
+      '', // Data ISO (preenchido por Apps Script)
+      gclid || ''
     ]);
 
     console.log('Successfully synced lead to Google Sheets');

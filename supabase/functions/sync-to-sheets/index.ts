@@ -88,11 +88,11 @@ async function getAccessToken(serviceAccountKey: string): Promise<string> {
 async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): Promise<void> {
   const headers = [
     'Mês', 'Data', 'Nome', 'Empresa', 'CNPJ', 'Email', 'Telefone', 'Mensagem', 
-    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO', 'gclid'
+    'Serviço', 'Tipo', 'Colaboradores', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'Status', 'Vendas', 'Data ISO', '', '', 'gclid'
   ];
 
   // Check if first row exists
-  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:S1`;
+  const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:U1`;
   const checkResponse = await fetch(checkUrl, {
     headers: { 'Authorization': `Bearer ${accessToken}` },
   });
@@ -102,7 +102,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
   // If no values or first cell is empty, add headers
   if (!checkResult.values || checkResult.values.length === 0 || !checkResult.values[0][0]) {
     console.log('Adding headers to sheet...');
-    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:S1?valueInputOption=USER_ENTERED`;
+    const updateUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A1:U1?valueInputOption=USER_ENTERED`;
     
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
@@ -123,7 +123,7 @@ async function checkAndAddHeaders(accessToken: string, spreadsheetId: string): P
 }
 
 async function appendToSheet(accessToken: string, spreadsheetId: string, values: string[]): Promise<void> {
-  const range = 'A:S'; // Columns A to S (19 columns)
+  const range = 'A:U'; // Columns A to U (21 columns)
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const response = await fetch(url, {
@@ -248,7 +248,7 @@ serve(async (req) => {
     // Ensure headers exist
     await checkAndAddHeaders(accessToken, spreadsheetId);
 
-    // Append lead data: Mês, Data, Nome, Empresa, CNPJ, Email, Telefone, Mensagem, Serviço, Tipo, Colaboradores, utm_source, utm_medium, utm_campaign, utm_term, Status, Vendas, Data ISO
+    // Append lead data: Mês, Data, Nome, Empresa, CNPJ, Email, Telefone, Mensagem, Serviço, Tipo, Colaboradores, utm_source, utm_medium, utm_campaign, utm_term, Status, Vendas, Data ISO, (reservado), (reservado), gclid
     await appendToSheet(accessToken, spreadsheetId, [
       brazilDate.month,
       brazilDate.formatted,
@@ -268,6 +268,8 @@ serve(async (req) => {
       '', // Status (preenchido manualmente)
       '', // Vendas (preenchido manualmente)
       '', // Data ISO (preenchido por Apps Script)
+      '', // Coluna S reservada
+      '', // Coluna T reservada
       gclid || ''
     ]);
 

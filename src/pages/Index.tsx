@@ -148,7 +148,7 @@ const Index = () => {
         <img 
           src={heroBanner}
           alt="O full service que dá certo - Grupo Liderança"
-          className="w-full h-auto object-cover object-left md:object-center min-h-[300px] md:min-h-[500px] lg:min-h-[600px]"
+          className="w-full h-auto object-contain md:object-cover md:object-center md:min-h-[500px] lg:min-h-[600px]"
         />
         {/* Blue shadow fade for mobile - blends with section below */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />

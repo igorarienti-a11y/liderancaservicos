@@ -150,7 +150,7 @@ const Index = () => {
           className="w-full h-auto object-contain md:aspect-[2/1] md:object-cover md:object-bottom"
         />
         {/* Blue shadow fade for mobile - blends with section below */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />
+        <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />
         {/* Overlay with buttons - hidden on mobile */}
         <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent py-8">
           <div className="container mx-auto px-4">
@@ -203,7 +203,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section id="servicos" className="relative bg-primary py-16 md:py-20 overflow-hidden">
+      <section id="servicos" className="relative bg-primary pt-6 pb-16 md:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-primary z-0" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Users, Building2, Award, ChevronRight, Star } from "lucide-react";
 import logoLideranca from "@/assets/logo-lideranca.png";
-import heroBannerAsset from "@/assets/hero-banner.webp.asset.json";
-const heroBanner = heroBannerAsset.url;
+import heroBanner from "@/assets/hero-banner.png";
 import BrazilMap from "@/components/BrazilMap";
 import { Button } from "@/components/ui/button";
 import {

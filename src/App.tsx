@@ -30,7 +30,7 @@ import NotFound from "./pages/NotFound";
 import ThankYouPage from "./pages/ThankYouPage";
 
 // Import hero images for preloading
-import heroBanner from "@/assets/hero-banner.png";
+import heroBanner from "@/assets/hero-banner.webp";
 import heroFacilities from "@/assets/hero-facilities-new.png";
 import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
 import heroSeguranca from "@/assets/hero-seguranca-new.png";

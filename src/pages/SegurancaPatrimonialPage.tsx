@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Shield, Camera, DoorOpen, Users } from "lucide-react";
-import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.png";
+import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.webp";
 
 const SegurancaPatrimonialPage = () => {
   const services = [

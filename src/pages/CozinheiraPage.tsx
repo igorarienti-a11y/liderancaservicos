@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { ChefHat, Utensils, Clock, Users } from "lucide-react";
-import heroCozinheira from "@/assets/hero-cozinheira.png";
+import heroCozinheira from "@/assets/hero-cozinheira.webp";
 
 const CozinheiraPage = () => {
   const services = [

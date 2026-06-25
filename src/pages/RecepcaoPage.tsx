@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Phone, Users, Calendar, Smile } from "lucide-react";
-import heroRecepcao from "@/assets/hero-recepcao.png";
+import heroRecepcao from "@/assets/hero-recepcao.webp";
 
 const RecepcaoPage = () => {
   const services = [

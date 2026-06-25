@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { DoorOpen, Shield, Users, ClipboardCheck } from "lucide-react";
-import heroPortaria from "@/assets/hero-portaria.png";
+import heroPortaria from "@/assets/hero-portaria.webp";
 
 const PortariaPage = () => {
   const services = [

@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Factory, Cog, Building, Sparkles } from "lucide-react";
-import heroLimpezaConservacao from "@/assets/hero-limpeza-conservacao.png";
+import heroLimpezaConservacao from "@/assets/hero-limpeza-conservacao.webp";
 
 const LimpezaIndustriaPage = () => {
   const services = [

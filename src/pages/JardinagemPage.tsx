@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Trees, Leaf, Scissors, Droplets } from "lucide-react";
-import heroJardinagem from "@/assets/hero-jardinagem.png";
+import heroJardinagem from "@/assets/hero-jardinagem.webp";
 
 const JardinagemPage = () => {
   const services = [

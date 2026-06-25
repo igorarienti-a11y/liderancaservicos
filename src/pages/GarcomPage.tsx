@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Wine, Users, Utensils, Calendar } from "lucide-react";
-import heroGarcom from "@/assets/hero-garcom.png";
+import heroGarcom from "@/assets/hero-garcom.webp";
 
 const GarcomPage = () => {
   const services = [

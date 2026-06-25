@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { ArrowUpDown, Users, Clock, Shield } from "lucide-react";
-import heroAscensorista from "@/assets/hero-ascensorista.png";
+import heroAscensorista from "@/assets/hero-ascensorista.webp";
 
 const AscensoristaPage = () => {
   const services = [

@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { FileText, Keyboard, ClipboardList, Archive } from "lucide-react";
-import heroDigitacao from "@/assets/hero-digitacao.png";
+import heroDigitacao from "@/assets/hero-digitacao.webp";
 
 const DigitacaoPage = () => {
   const services = [

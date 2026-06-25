@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Home, Wrench, ClipboardCheck, Eye } from "lucide-react";
-import heroZeladoria from "@/assets/hero-zeladoria.png";
+import heroZeladoria from "@/assets/hero-zeladoria.webp";
 
 const ZeladoriaPage = () => {
   const services = [

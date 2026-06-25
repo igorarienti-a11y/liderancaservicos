@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Car, Truck, Clock, Shield } from "lucide-react";
-import heroMotorista from "@/assets/hero-motorista.png";
+import heroMotorista from "@/assets/hero-motorista.webp";
 
 const MotoristaPage = () => {
   const services = [

@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-import heroSeguranca from "@/assets/hero-seguranca-new.png";
+import heroSeguranca from "@/assets/hero-seguranca-new.webp";
 import { Shield, Building2, DoorOpen, Camera } from "lucide-react";
 
 const SegurancaPage = () => {

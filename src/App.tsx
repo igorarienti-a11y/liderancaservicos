@@ -31,22 +31,22 @@ import ThankYouPage from "./pages/ThankYouPage";
 
 // Import hero images for preloading
 import heroBanner from "@/assets/hero-banner.webp";
-import heroFacilities from "@/assets/hero-facilities-new.png";
-import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
-import heroSeguranca from "@/assets/hero-seguranca-new.png";
-import heroTelefonia from "@/assets/hero-telefonia.png";
-import heroPortaria from "@/assets/hero-portaria.png";
-import heroRecepcao from "@/assets/hero-recepcao.png";
-import heroAscensorista from "@/assets/hero-ascensorista.png";
-import heroCopaCafe from "@/assets/hero-copa-cafe.png";
-import heroCozinheira from "@/assets/hero-cozinheira.png";
-import heroDigitacao from "@/assets/hero-digitacao.png";
-import heroGarcom from "@/assets/hero-garcom.png";
-import heroJardinagem from "@/assets/hero-jardinagem.png";
-import heroMaoDeObra from "@/assets/hero-mao-de-obra.png";
-import heroMotorista from "@/assets/hero-motorista.png";
-import heroZeladoria from "@/assets/hero-zeladoria.png";
-import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.png";
+import heroFacilities from "@/assets/hero-facilities-new.webp";
+import heroLimpeza from "@/assets/hero-limpeza-conservacao.webp";
+import heroSeguranca from "@/assets/hero-seguranca-new.webp";
+import heroTelefonia from "@/assets/hero-telefonia.webp";
+import heroPortaria from "@/assets/hero-portaria.webp";
+import heroRecepcao from "@/assets/hero-recepcao.webp";
+import heroAscensorista from "@/assets/hero-ascensorista.webp";
+import heroCopaCafe from "@/assets/hero-copa-cafe.webp";
+import heroCozinheira from "@/assets/hero-cozinheira.webp";
+import heroDigitacao from "@/assets/hero-digitacao.webp";
+import heroGarcom from "@/assets/hero-garcom.webp";
+import heroJardinagem from "@/assets/hero-jardinagem.webp";
+import heroMaoDeObra from "@/assets/hero-mao-de-obra.webp";
+import heroMotorista from "@/assets/hero-motorista.webp";
+import heroZeladoria from "@/assets/hero-zeladoria.webp";
+import heroSegurancaPatrimonial from "@/assets/hero-seguranca-patrimonial.webp";
 
 const queryClient = new QueryClient();
 

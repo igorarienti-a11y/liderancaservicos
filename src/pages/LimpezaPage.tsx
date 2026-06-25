@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-import heroLimpeza from "@/assets/hero-limpeza-conservacao.png";
+import heroLimpeza from "@/assets/hero-limpeza-conservacao.webp";
 import { Building, Factory, HeartPulse, Home } from "lucide-react";
 
 const LimpezaPage = () => {

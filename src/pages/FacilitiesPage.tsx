@@ -7,7 +7,7 @@ import CTASection from "@/components/landing/CTASection";
 import LeadForm from "@/components/landing/LeadForm";
 import Footer from "@/components/landing/Footer";
 import MobileCTAButton from "@/components/landing/MobileCTAButton";
-import heroFacilities from "@/assets/hero-facilities-new.png";
+import heroFacilities from "@/assets/hero-facilities-new.webp";
 
 import cardPortaria from "@/assets/card-portaria.png";
 import cardRecepcao from "@/assets/card-recepcao.png";

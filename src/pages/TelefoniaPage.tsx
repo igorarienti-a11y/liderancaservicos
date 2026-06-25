@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Phone, Headphones, Users, Clock } from "lucide-react";
-import heroTelefonia from "@/assets/hero-telefonia.png";
+import heroTelefonia from "@/assets/hero-telefonia.webp";
 
 const TelefoniaPage = () => {
   const services = [

@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { Coffee, Utensils, Users, Clock } from "lucide-react";
-import heroCopaCafe from "@/assets/hero-copa-cafe.png";
+import heroCopaCafe from "@/assets/hero-copa-cafe.webp";
 
 const CopaCafePage = () => {
   const services = [

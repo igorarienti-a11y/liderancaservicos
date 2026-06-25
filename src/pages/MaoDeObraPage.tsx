@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/landing/ServicePageTemplate";
 import { HardHat, Wrench, Package, Users } from "lucide-react";
-import heroMaoDeObra from "@/assets/hero-mao-de-obra.png";
+import heroMaoDeObra from "@/assets/hero-mao-de-obra.webp";
 
 const MaoDeObraPage = () => {
   const services = [

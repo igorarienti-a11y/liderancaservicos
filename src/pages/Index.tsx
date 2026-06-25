@@ -126,13 +126,13 @@ const Index = () => {
       {/* Header */}
       <header className="bg-primary py-4">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <a href="https://www.lideranca.com.br" target="_blank" rel="noopener noreferrer">
+          <Link to="/">
             <img
               src={logoLideranca}
               alt="Grupo Liderança - Compromisso com seu bem-estar"
               className="h-12 md:h-16 w-auto"
             />
-          </a>
+          </Link>
           <nav className="hidden lg:flex items-center gap-6">
             <Link to="/" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Início</Link>
             <a href="#servicos" className="text-primary-foreground hover:text-secondary transition-colors font-medium">Nossos Serviços</a>
@@ -144,10 +144,10 @@ const Index = () => {
 
       {/* Hero Section with Banner Image */}
       <section className="relative w-full bg-primary">
-        <img 
+        <img
           src={heroBanner}
           alt="O full service que dá certo - Grupo Liderança"
-          className="w-full h-auto object-contain"
+          className="w-full h-auto object-contain md:h-[58vh] md:max-h-[600px] md:object-cover md:object-[center_80%]"
         />
         {/* Blue shadow fade for mobile - blends with section below */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary via-primary/80 to-transparent md:hidden z-[5]" />

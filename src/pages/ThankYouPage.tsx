@@ -15,13 +15,13 @@ const ThankYouPage = () => {
       {/* Header simplificado */}
       <header className="bg-primary py-4">
         <div className="container mx-auto px-4 flex items-center justify-center">
-          <a href="https://www.lideranca.com.br" target="_blank" rel="noopener noreferrer">
+          <Link to="/">
             <img
               src={logoLideranca}
               alt="Grupo Liderança"
               className="h-12 md:h-14 w-auto"
             />
-          </a>
+          </Link>
         </div>
       </header>
 

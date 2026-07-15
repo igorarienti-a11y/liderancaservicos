@@ -5,13 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { useUTM } from "@/hooks/use-utm";
+import { useTracking } from "@/hooks/use-tracking";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 declare global {
   interface Window {
     dataLayer: Record<string, unknown>[];
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -33,7 +34,7 @@ interface LeadFormProps {
 const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const utmParams = useUTM();
+  const { buildLeadTracking } = useTracking();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
@@ -61,7 +62,10 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
 
     try {
       const validatedData = leadSchema.parse(formData);
-      
+
+      // Snapshot completo do tracking (gera o event_id compartilhado pixel↔CAPI)
+      const tracking = buildLeadTracking(validatedData.nome);
+
       // Save lead to database
       const { error } = await supabase.from("leads").insert({
         nome: validatedData.nome,
@@ -78,7 +82,12 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         throw new Error("Erro ao salvar lead");
       }
 
-      // Sync to Google Sheets (non-blocking)
+      // Meta Pixel — Lead browser-side (deduplica com o CAPI da edge via event_id)
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {}, { eventID: tracking.event_id });
+      }
+
+      // Sync to Google Sheets + Meta CAPI (non-blocking)
       supabase.functions.invoke('sync-to-sheets', {
         body: {
           nome: validatedData.nome,
@@ -90,12 +99,12 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
           serviceName,
           serviceType,
           numeroColaboradores: validatedData.numeroColaboradores,
-          ...utmParams,
+          ...tracking,
         }
       }).catch((err) => {
         console.error('Erro ao sincronizar com Google Sheets:', err);
       });
-      
+
       // Dispara evento para o Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({

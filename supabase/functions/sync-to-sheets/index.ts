@@ -97,17 +97,20 @@ async function ensureHeaders(
   }
 
   if (missing.length > 0) {
-    const startCol = existing.length + 1; // primeira coluna livre à direita
-    const range = `${colLetter(startCol)}1:${colLetter(startCol + missing.length - 1)}1`;
-    await fetch(
+    // Reescreve a linha 1 INTEIRA (existentes + novas) numa tacada, ancorada em A1.
+    // Preserva exatamente os cabeçalhos que já existem e só acrescenta os que faltam à direita.
+    const full = [...existing, ...missing];
+    const range = `A1:${colLetter(full.length)}1`;
+    const res = await fetch(
       `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
       {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ values: [missing] }),
+        body: JSON.stringify({ values: [full] }),
       },
     );
-    return [...existing, ...missing];
+    if (!res.ok) throw new Error(`Failed to write headers: ${JSON.stringify(await res.json())}`);
+    return full;
   }
   return existing;
 }
@@ -120,8 +123,10 @@ async function appendByHeader(
     const key = h.trim().toLowerCase();
     return key in valueMap ? (valueMap[key] ?? '') : '';
   });
-  const range = `A:${colLetter(headers.length)}`;
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
+  // Ancora o append SÓ na coluna A. Um range largo (A:AO) faz o Sheets confundir a
+  // detecção de tabela com dados órfãos em colunas à direita e desalinha a linha.
+  // Com A:A, os valores da linha ainda preenchem A..N (a largura vem do array).
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:A:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },

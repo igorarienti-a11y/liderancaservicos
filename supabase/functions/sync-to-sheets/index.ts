@@ -115,24 +115,34 @@ async function ensureHeaders(
   return existing;
 }
 
-// Monta a linha na ordem EXATA dos headers da planilha e faz append RAW.
-async function appendByHeader(
+// Grava a linha na ordem EXATA dos headers, via values.update numa célula explícita.
+// NÃO usa append: a planilha tem coluna vazia no meio (S) que faz o append do Google
+// jogar a linha no pedaço de tabela à direita do buraco. Escrita explícita em A{linha}
+// preenche exatamente A..N a partir da coluna A — impossível desalinhar.
+async function writeRowAtBottom(
   accessToken: string, spreadsheetId: string, headers: string[], valueMap: Record<string, string>,
 ): Promise<void> {
   const row = headers.map((h) => {
     const key = h.trim().toLowerCase();
     return key in valueMap ? (valueMap[key] ?? '') : '';
   });
-  // Ancora o append SÓ na coluna A. Um range largo (A:AO) faz o Sheets confundir a
-  // detecção de tabela com dados órfãos em colunas à direita e desalinha a linha.
-  // Com A:A, os valores da linha ainda preenchem A..N (a largura vem do array).
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:A:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ values: [row] }),
-  });
-  if (!res.ok) throw new Error(`Failed to append: ${JSON.stringify(await res.json())}`);
+  // Próxima linha vazia = nº de linhas com qualquer dado + 1 (conta até linhas antigas desalinhadas).
+  const readRes = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:BZ?majorDimension=ROWS`,
+    { headers: { 'Authorization': `Bearer ${accessToken}` } },
+  );
+  const readJson = await readRes.json();
+  const target = (readJson.values ? readJson.values.length : 0) + 1;
+  const range = `A${target}:${colLetter(headers.length)}${target}`;
+  const res = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
+    {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ values: [row] }),
+    },
+  );
+  if (!res.ok) throw new Error(`Failed to write row: ${JSON.stringify(await res.json())}`);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -163,17 +173,39 @@ async function sha256Hex(s: string): Promise<string> {
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-interface Geo { city: string; region_code: string; postal: string; }
+interface Geo { city: string; region_code: string; postal: string; country: string; }
 async function geoFromIp(ip: string): Promise<Geo> {
+  const empty: Geo = { city: '', region_code: '', postal: '', country: '' };
+  if (!ip) return empty;
+  // 1ª opção: ipwho.is — grátis, HTTPS, sem chave, retorna cidade/estado/CEP/país numa call.
   try {
-    if (!ip) return { city: '', region_code: '', postal: '' };
+    const r = await fetch(`https://ipwho.is/${ip}`);
+    if (r.ok) {
+      const j = await r.json();
+      if (j && j.success !== false) {
+        return {
+          city: j.city || '',
+          region_code: j.region_code || j.region || '',
+          postal: digitsOnly(j.postal || ''),
+          country: j.country || j.country_code || '',
+        };
+      }
+    }
+  } catch (_) { /* cai no fallback */ }
+  // Fallback: ipapi.co
+  try {
     const r = await fetch(`https://ipapi.co/${ip}/json/`);
-    if (!r.ok) return { city: '', region_code: '', postal: '' };
-    const j = await r.json();
-    return { city: j.city || '', region_code: j.region_code || '', postal: digitsOnly(j.postal || '') };
-  } catch (_) {
-    return { city: '', region_code: '', postal: '' };
-  }
+    if (r.ok) {
+      const j = await r.json();
+      return {
+        city: j.city || '',
+        region_code: j.region_code || '',
+        postal: digitsOnly(j.postal || ''),
+        country: j.country_name || j.country || '',
+      };
+    }
+  } catch (_) { /* ignora */ }
+  return empty;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -258,7 +290,7 @@ const BASE_HEADERS = [
 // Colunas de tracking novas (adicionadas à direita se não existirem)
 const TRACKING_HEADERS = [
   'Event ID', 'FBCLID', 'FBP', 'FBC', 'GBRAID', 'WBRAID', 'TTCLID', 'MSCLKID',
-  'Primeiro Nome', 'Sobrenome', 'Cidade', 'Estado', 'CEP', 'IP', 'Navegador',
+  'Primeiro Nome', 'Sobrenome', 'Cidade', 'Estado', 'CEP', 'Pais', 'IP', 'Navegador',
   'Resolucao', 'Fuso Horario', 'Pagina', 'Referencia', 'Idioma',
 ];
 
@@ -350,6 +382,7 @@ serve(async (req) => {
       'cidade': geo.city,
       'estado': geo.region_code,
       'cep': geo.postal,
+      'pais': geo.country,
       'ip': ip,
       'navegador': user_agent,
       'resolucao': screen || '',
@@ -359,7 +392,7 @@ serve(async (req) => {
       'idioma': language || '',
     };
 
-    await appendByHeader(accessToken, spreadsheetId, headers, valueMap);
+    await writeRowAtBottom(accessToken, spreadsheetId, headers, valueMap);
 
     // CAPI Lead (dedup com o pixel do browser via event_id). Não bloqueia a resposta.
     await sendMetaCapi({

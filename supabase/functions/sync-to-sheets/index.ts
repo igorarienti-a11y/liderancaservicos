@@ -131,8 +131,11 @@ async function writeRowAtBottom(
     `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:BZ?majorDimension=ROWS`,
     { headers: { 'Authorization': `Bearer ${accessToken}` } },
   );
+  if (!readRes.ok) throw new Error(`Failed to read sheet size: ${JSON.stringify(await readRes.json())}`);
   const readJson = await readRes.json();
   const target = (readJson.values ? readJson.values.length : 0) + 1;
+  // Trava de segurança: nunca escrever na linha 1 (cabeçalho) nem na 2 (evita colisão se a leitura vier vazia por engano).
+  if (target < 2) throw new Error(`Unsafe target row ${target} — abortando pra não sobrescrever cabeçalho`);
   const range = `A${target}:${colLetter(headers.length)}${target}`;
   const res = await fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,

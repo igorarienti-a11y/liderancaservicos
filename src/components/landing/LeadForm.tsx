@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useTracking } from "@/hooks/use-tracking";
+import { fireGoogleConversion, CONVERSION_LABELS } from "@/lib/gtag";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
@@ -87,6 +88,15 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         window.fbq('track', 'Lead', {}, { eventID: tracking.event_id });
       }
 
+      // Google Ads — conversão + enhanced conversions com dados do STATE
+      // (transaction_id = event_id evita double-submit)
+      fireGoogleConversion(CONVERSION_LABELS.form, tracking.event_id, {
+        email: validatedData.email,
+        phone: validatedData.telefone,
+        firstName: tracking.first_name,
+        lastName: tracking.last_name,
+      });
+
       // Sync to Google Sheets + Meta CAPI (non-blocking)
       supabase.functions.invoke('sync-to-sheets', {
         body: {
@@ -105,12 +115,14 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         console.error('Erro ao sincronizar com Google Sheets:', err);
       });
 
-      // Dispara evento para o Google Tag Manager
+      // Espelho no dataLayer (email/whats inclusos p/ qualquer ferramenta futura)
       if (typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({
           event: 'send_form',
           form_name: serviceName,
           form_type: serviceType,
+          email: validatedData.email,
+          whats: validatedData.telefone,
         });
       }
       

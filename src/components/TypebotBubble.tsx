@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { installTypebotConversionListener } from "@/lib/gtag";
 
 // Embed do Typebot na LP (movido do GTM) — permite prefill do tracking lido no
 // contexto da LP (onde os cookies _fbp/_fbc SÃO acessíveis, diferente do iframe).
@@ -24,6 +25,9 @@ const TypebotBubble = () => {
   useEffect(() => {
     if (initialized) return;
     initialized = true;
+
+    // Converte o push `lead_typebot` do bot em conversão Google Ads (sem GTM)
+    installTypebotConversionListener();
 
     const p = new URLSearchParams(window.location.search);
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTracking } from "@/hooks/use-tracking";
 import { fireGoogleConversion, CONVERSION_LABELS } from "@/lib/gtag";
 import { supabase } from "@/integrations/supabase/client";
+import { maskCnpj, onlyDigits, isValidCnpj, lookupCnpj } from "@/lib/cnpj";
 import { z } from "zod";
 
 declare global {
@@ -20,7 +21,13 @@ declare global {
 const leadSchema = z.object({
   nome: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
   empresa: z.string().trim().min(2, "Nome da empresa deve ter pelo menos 2 caracteres").max(100, "Nome da empresa muito longo"),
-  cnpj: z.string().trim().max(18, "CNPJ muito longo").optional().or(z.literal("")),
+  cnpj: z
+    .string()
+    .trim()
+    .max(18, "CNPJ muito longo")
+    .refine((v) => !v || isValidCnpj(v), "CNPJ inválido — confira os números.")
+    .optional()
+    .or(z.literal("")),
   email: z.string().trim().email("E-mail inválido").max(255, "E-mail muito longo"),
   telefone: z.string().trim().min(10, "Telefone deve ter pelo menos 10 dígitos").max(20, "Telefone muito longo"),
   numeroColaboradores: z.string().min(1, "Selecione o número de colaboradores"),
@@ -48,13 +55,74 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // CNPJ — consulta na Receita Federal (BrasilAPI). "notfound" é o único estado que bloqueia
+  // o envio; erro de rede cai em "unknown" e deixa passar (nunca perder lead por API fora do ar).
+  const [cnpjInfo, setCnpjInfo] = useState<{
+    state: "idle" | "loading" | "ok" | "inativa" | "notfound";
+    msg: string;
+  }>({ state: "idle", msg: "" });
+  // Marca que o campo Empresa foi preenchido pela Receita — só assim podemos sobrescrever.
+  const empresaDaReceita = useRef(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "empresa") empresaDaReceita.current = false;
+    setFormData((prev) => ({ ...prev, [name]: name === "cnpj" ? maskCnpj(value) : value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
+
+  const cnpjDigits = onlyDigits(formData.cnpj);
+  useEffect(() => {
+    if (!cnpjDigits) {
+      setCnpjInfo({ state: "idle", msg: "" });
+      return;
+    }
+    if (!isValidCnpj(cnpjDigits)) {
+      setCnpjInfo({ state: "idle", msg: "" });
+      return;
+    }
+
+    let cancelado = false;
+    setCnpjInfo({ state: "loading", msg: "Consultando na Receita Federal…" });
+    const t = setTimeout(async () => {
+      const r = await lookupCnpj(cnpjDigits);
+      if (cancelado) return;
+
+      if (r.status === "notfound") {
+        setCnpjInfo({ state: "notfound", msg: "CNPJ não encontrado na Receita Federal." });
+        return;
+      }
+      if (r.status === "unknown") {
+        setCnpjInfo({ state: "idle", msg: "" });
+        return;
+      }
+
+      const local = r.municipio ? ` · ${r.municipio}/${r.uf}` : "";
+      const nome = r.razaoSocial || "CNPJ válido";
+      if (r.situacao && r.situacao !== "ATIVA") {
+        setCnpjInfo({ state: "inativa", msg: `${nome}${local} · situação cadastral: ${r.situacao}` });
+      } else {
+        setCnpjInfo({ state: "ok", msg: `${nome}${local}` });
+      }
+
+      // Preenche Empresa com a razão social quando o campo está vazio (ou já veio da Receita).
+      if (r.razaoSocial) {
+        setFormData((prev) => {
+          if (prev.empresa.trim() && !empresaDaReceita.current) return prev;
+          empresaDaReceita.current = true;
+          return { ...prev, empresa: r.razaoSocial };
+        });
+        setErrors((prev) => (prev.empresa ? { ...prev, empresa: "" } : prev));
+      }
+    }, 400);
+
+    return () => {
+      cancelado = true;
+      clearTimeout(t);
+    };
+  }, [cnpjDigits]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,6 +131,17 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
 
     try {
       const validatedData = leadSchema.parse(formData);
+
+      // Trava da Receita: CNPJ com dígitos válidos mas inexistente não passa.
+      // lookupCnpj é cacheado — no caminho normal já resolveu durante a digitação.
+      if (cnpjDigits) {
+        const r = await lookupCnpj(cnpjDigits);
+        if (r.status === "notfound") {
+          setCnpjInfo({ state: "notfound", msg: "CNPJ não encontrado na Receita Federal." });
+          setErrors({ cnpj: "CNPJ não encontrado na Receita Federal — confira os números." });
+          return; // o finally devolve o botão
+        }
+      }
 
       // Snapshot completo do tracking (gera o event_id compartilhado pixel↔CAPI)
       const tracking = buildLeadTracking(validatedData.nome);
@@ -140,6 +219,8 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         numeroColaboradores: "",
         mensagem: "",
       });
+      setCnpjInfo({ state: "idle", msg: "" });
+      empresaDaReceita.current = false;
 
       // Redirect to thank you page
       navigate("/tkyp");
@@ -223,8 +304,26 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                     value={formData.cnpj}
                     onChange={handleChange}
                     placeholder="00.000.000/0000-00"
+                    inputMode="numeric"
+                    maxLength={18}
                     className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
                   />
+                  {cnpjInfo.msg && (
+                    <p
+                      className={`text-sm ${
+                        cnpjInfo.state === "ok"
+                          ? "text-emerald-300"
+                          : cnpjInfo.state === "inativa"
+                          ? "text-amber-300"
+                          : cnpjInfo.state === "notfound"
+                          ? "text-red-300"
+                          : "text-primary-foreground/70"
+                      }`}
+                    >
+                      {cnpjInfo.state === "ok" || cnpjInfo.state === "inativa" ? "✓ " : ""}
+                      {cnpjInfo.msg}
+                    </p>
+                  )}
                   {errors.cnpj && <p className="text-secondary text-sm">{errors.cnpj}</p>}
                 </div>
 

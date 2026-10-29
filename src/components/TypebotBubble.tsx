@@ -19,15 +19,12 @@ function uuid(): string {
   });
 }
 
-// Bot por LP (29/10/2026): cada campanha tem conversa própria, que filtra contrato anual.
-// A escolha é pela página de entrada (o bubble inicia uma vez só). Fora da lista, bot geral.
+// Bot por LP (29/10/2026): só as 3 LPs do ajuste têm conversa própria, que filtra contrato anual.
+// A escolha é pela página de entrada (o bubble inicia uma vez só). Todas as outras, bot geral.
 const BOT_POR_PAGINA: Record<string, string[]> = {
-  "lideranca-limpeza": ["/limpeza", "/limpeza-conservacao", "/limpeza-industria"],
-  "lideranca-seguranca": ["/seguranca-patrimonial", "/seguranca"],
-  "lideranca-facilities": [
-    "/facilities", "/portaria", "/recepcao", "/zeladoria", "/copa-cafe", "/telefonia", "/jardinagem",
-    "/garcom", "/mao-de-obra", "/motorista", "/cozinheira", "/ascensorista", "/digitacao", "/sindico",
-  ],
+  "lideranca-limpeza": ["/limpeza-conservacao"],
+  "lideranca-seguranca": ["/seguranca-patrimonial"],
+  "lideranca-facilities": ["/facilities"],
 };
 const BOT_GERAL = "lideran-a-zl1nnhn";
 

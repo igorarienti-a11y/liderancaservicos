@@ -31,6 +31,11 @@ const leadSchema = z.object({
   email: z.string().trim().email("E-mail inválido").max(255, "E-mail muito longo"),
   telefone: z.string().trim().min(10, "Telefone deve ter pelo menos 10 dígitos").max(20, "Telefone muito longo"),
   numeroColaboradores: z.string().min(1, "Selecione o número de colaboradores"),
+  // A Liderança só atende contrato anual: "Temporário" não vira lead (nem conversão).
+  tipoContrato: z
+    .string()
+    .min(1, "Selecione o tipo de contrato")
+    .refine((v) => !v || v === "Anual", "Atendemos apenas contratos anuais."),
   mensagem: z.string().trim().max(1000, "Mensagem muito longa").optional(),
 });
 
@@ -51,6 +56,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
     email: "",
     telefone: "",
     numeroColaboradores: "",
+    tipoContrato: "",
     mensagem: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -217,6 +223,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
         email: "",
         telefone: "",
         numeroColaboradores: "",
+        tipoContrato: "",
         mensagem: "",
       });
       setCnpjInfo({ state: "idle", msg: "" });
@@ -383,6 +390,42 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                   </Select>
                   {errors.numeroColaboradores && <p className="text-secondary text-sm">{errors.numeroColaboradores}</p>}
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="tipoContrato" className="text-primary-foreground font-medium">
+                  Tipo de contrato *
+                </label>
+                <Select
+                  value={formData.tipoContrato}
+                  onValueChange={(value) => {
+                    setFormData((prev) => ({ ...prev, tipoContrato: value }));
+                    if (errors.tipoContrato) {
+                      setErrors((prev) => ({ ...prev, tipoContrato: "" }));
+                    }
+                  }}
+                >
+                  <SelectTrigger
+                    id="tipoContrato"
+                    className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground h-12"
+                  >
+                    <SelectValue placeholder="Selecione uma opção" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Anual">Anual</SelectItem>
+                    <SelectItem value="Temporário">Temporário</SelectItem>
+                  </SelectContent>
+                </Select>
+                {formData.tipoContrato === "Temporário" && (
+                  <p className="text-amber-300 text-sm">
+                    A Liderança trabalha apenas com contratos anuais, com equipe fixa e gestão contínua. Serviços
+                    temporários ou pontuais, como eventos, viagens ou cobertura de férias, nós não atendemos. Se um
+                    contrato anual fizer sentido para vocês, escolha "Anual".
+                  </p>
+                )}
+                {errors.tipoContrato && formData.tipoContrato !== "Temporário" && (
+                  <p className="text-secondary text-sm">{errors.tipoContrato}</p>
+                )}
               </div>
 
               <div className="space-y-2">

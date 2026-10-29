@@ -19,6 +19,26 @@ function uuid(): string {
   });
 }
 
+// Bot por LP (29/10/2026): cada campanha tem conversa própria, que filtra contrato anual.
+// A escolha é pela página de entrada (o bubble inicia uma vez só). Fora da lista, bot geral.
+const BOT_POR_PAGINA: Record<string, string[]> = {
+  "lideranca-limpeza": ["/limpeza", "/limpeza-conservacao", "/limpeza-industria"],
+  "lideranca-seguranca": ["/seguranca-patrimonial", "/seguranca"],
+  "lideranca-facilities": [
+    "/facilities", "/portaria", "/recepcao", "/zeladoria", "/copa-cafe", "/telefonia", "/jardinagem",
+    "/garcom", "/mao-de-obra", "/motorista", "/cozinheira", "/ascensorista", "/digitacao", "/sindico",
+  ],
+};
+const BOT_GERAL = "lideran-a-zl1nnhn";
+
+function botDaPagina(pathname: string): string {
+  const path = pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  for (const [bot, paginas] of Object.entries(BOT_POR_PAGINA)) {
+    if (paginas.includes(path)) return bot;
+  }
+  return BOT_GERAL;
+}
+
 let initialized = false;
 
 const TypebotBubble = () => {
@@ -94,7 +114,7 @@ const TypebotBubble = () => {
         const Typebot = (mod as { default?: { initBubble: (c: unknown) => void }; initBubble?: (c: unknown) => void });
         const init = Typebot.default?.initBubble || Typebot.initBubble;
         init?.({
-          typebot: "lideran-a-zl1nnhn",
+          typebot: botDaPagina(window.location.pathname),
           prefilledVariables,
           theme: {
             button: {

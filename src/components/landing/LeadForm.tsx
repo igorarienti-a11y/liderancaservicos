@@ -18,7 +18,14 @@ declare global {
   }
 }
 
+// Órgão público não vira lead: a Liderança só atende o setor público por licitação.
+const EMAIL_LICITACOES = "licitacoes@lideranca.com.br";
+
 const leadSchema = z.object({
+  tipoEmpresa: z
+    .string()
+    .min(1, "Selecione o tipo de empresa")
+    .refine((v) => !v || v === "Empresa privada", "Órgãos públicos são atendidos pelo setor de licitações."),
   nome: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
   empresa: z.string().trim().min(2, "Nome da empresa deve ter pelo menos 2 caracteres").max(100, "Nome da empresa muito longo"),
   cnpj: z
@@ -49,7 +56,10 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
   const navigate = useNavigate();
   const { buildLeadTracking } = useTracking();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // "Não, preciso de temporário": o formulário sai e fica só o agradecimento (sem lead, sem conversão).
+  const [encerrado, setEncerrado] = useState(false);
   const [formData, setFormData] = useState({
+    tipoEmpresa: "",
     nome: "",
     empresa: "",
     cnpj: "",
@@ -217,6 +227,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
       });
       
       setFormData({
+        tipoEmpresa: "",
         nome: "",
         empresa: "",
         cnpj: "",
@@ -269,7 +280,55 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
               </p>
             </div>
 
+            {encerrado ? (
+              <div role="status" className="rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 p-6 md:p-8 text-center">
+                <p className="text-primary-foreground font-semibold text-lg mb-2">Obrigado pelo contato!</p>
+                <p className="text-primary-foreground/90">
+                  No momento a Liderança não atende serviços temporários ou pontuais. Se no futuro precisar de um
+                  contrato anual, é só voltar por aqui.
+                </p>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <div className="space-y-2">
+                <label htmlFor="tipoEmpresa" className="text-primary-foreground font-medium">
+                  Tipo de empresa *
+                </label>
+                <Select
+                  value={formData.tipoEmpresa}
+                  onValueChange={(value) => {
+                    setFormData((prev) => ({ ...prev, tipoEmpresa: value }));
+                    if (errors.tipoEmpresa) {
+                      setErrors((prev) => ({ ...prev, tipoEmpresa: "" }));
+                    }
+                  }}
+                >
+                  <SelectTrigger
+                    id="tipoEmpresa"
+                    className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground h-12"
+                  >
+                    <SelectValue placeholder="Selecione uma opção" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Empresa privada">Empresa privada</SelectItem>
+                    <SelectItem value="Órgão público">Órgão público</SelectItem>
+                  </SelectContent>
+                </Select>
+                {formData.tipoEmpresa === "Órgão público" && (
+                  <p role="status" className="text-amber-300 text-sm">
+                    O atendimento a órgãos públicos é feito pelo nosso setor de licitações. Envie sua solicitação
+                    para{" "}
+                    <a href={`mailto:${EMAIL_LICITACOES}`} className="font-semibold underline whitespace-nowrap">
+                      {EMAIL_LICITACOES}
+                    </a>
+                    .
+                  </p>
+                )}
+                {errors.tipoEmpresa && formData.tipoEmpresa !== "Órgão público" && (
+                  <p className="text-secondary text-sm">{errors.tipoEmpresa}</p>
+                )}
+              </div>
+
               <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <label htmlFor="nome" className="text-primary-foreground font-medium">
@@ -417,11 +476,34 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                   </SelectContent>
                 </Select>
                 {formData.tipoContrato === "Temporário" && (
-                  <p className="text-amber-300 text-sm">
-                    A Liderança trabalha apenas com contratos anuais, com equipe fixa e gestão contínua. Serviços
-                    temporários ou pontuais, como eventos, viagens ou cobertura de férias, nós não atendemos. Se um
-                    contrato anual fizer sentido para vocês, escolha "Anual".
-                  </p>
+                  <div role="status" className="space-y-3">
+                    <p className="text-amber-300 text-sm">
+                      A Liderança trabalha apenas com contratos anuais, com equipe fixa e gestão contínua. Serviços
+                      temporários ou pontuais, como eventos, viagens ou cobertura de férias, nós não atendemos. Um
+                      contrato anual faria sentido para vocês?
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, tipoContrato: "Anual" }))}
+                        className="rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-secondary-foreground"
+                      >
+                        Sim, quero contrato anual
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEncerrado(true);
+                          if (typeof window !== "undefined" && window.dataLayer) {
+                            window.dataLayer.push({ event: "perfil_temporario_encerrado" });
+                          }
+                        }}
+                        className="rounded-lg border border-primary-foreground/40 px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                      >
+                        Não, preciso de temporário
+                      </button>
+                    </div>
+                  </div>
                 )}
                 {errors.tipoContrato && formData.tipoContrato !== "Temporário" && (
                   <p className="text-secondary text-sm">{errors.tipoContrato}</p>
@@ -497,6 +579,7 @@ const LeadForm = ({ serviceName, serviceType }: LeadFormProps) => {
                 Ao enviar, você concorda com nossa política de privacidade. Seus dados estão protegidos.
               </p>
             </form>
+            )}
           </div>
         </div>
       </div>
